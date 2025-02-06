@@ -63,7 +63,7 @@
         </aside>
 
         <!-- Main Content (Starts Below Navbar) -->
-        <div class="flex-1 p-6 overflow-auto">
+        <div class="flex-1 p-6 overflow-auto  bg-[#EBEFF2]">
             {{ $slot }}
         </div>
     </div>
