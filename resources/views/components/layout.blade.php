@@ -34,7 +34,8 @@
                     <!-- Logout Button -->
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button type="submit" class="text-md bg-white text-gray-700 hover:text-gray-900 px-3 py-2 rounded">
+                        <button type="submit"
+                            class="text-md bg-white text-gray-700 hover:text-gray-900 px-3 py-2 rounded">
                             <i class="bi bi-box-arrow-in-left"></i>Log Out
                         </button>
                     </form>
@@ -52,16 +53,18 @@
             class="bg-white shadow-lg sm:rounded-lg text-gray-500 w-[14rem] flex flex-col p-4 space-y-6 absolute md:relative inset-y-0 left-0 transform md:translate-x-0 transition duration-200 ease-in-out">
             <!-- Sidebar Navigation -->
             <nav>
-                <ul class="space-y-2">
+                <ul class="space-y-2 mt-12">
                     <li>
-                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 rounded">
-                            Dashboard
-                        </a>
+                        <div id="handlecliked"
+                            class="text-black transition-all ease-in-out hover:bg-gray-800 hover:w-full hover:font-semibold
+                            p-1 hover:rounded hover:text-white cursor-pointer">
+                            Approbation requêtes
+                            <i id="bi-btn" class="bi bi-chevron-up"></i>
+                        </div>
                     </li>
                 </ul>
             </nav>
         </aside>
-
         <!-- Main Content (Starts Below Navbar) -->
         <div class="flex-1 p-6 overflow-auto  bg-[#EBEFF2]">
             {{ $slot }}

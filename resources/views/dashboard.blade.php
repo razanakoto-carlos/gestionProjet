@@ -2,34 +2,46 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto grid grid-cols-4 gap-2">
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h3>Hello</h3>
-                    <p>Lorem ipsum dolor sit amet</p>
+                <div class="p-6">
+                    <h3 class="mb-2 text-lg text-gray-700">Projets</h3>
+                    <div class="flex justify-between font-bold text-3xl text-gray-500">
+                        <p>5</p>
+                        <i class="bi bi-calendar2-plus"></i>
+                    </div>
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h3>Hello</h3>
-                    <p>Lorem ipsum dolor sit amet</p>
+                <div class="p-6">
+                    <h3 class="mb-4 text-lg text-gray-700">Utilisateurs</h3>
+                    <div class="flex justify-between font-bold text-3xl text-gray-500">
+                        <p>6</p>
+                        <i class="bi bi-person"></i>
+                    </div>
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h3>Hello</h3>
-                    <p>Lorem ipsum dolor sit amet</p>
+                <div class="p-6 ">
+                    <h3 class="mb-4 text-lg text-gray-700">Requêtes validé</h3>
+                    <div class="flex justify-between font-bold text-3xl text-gray-500">
+                        <p>3</p>
+                        <i class="bi bi-calendar-check"></i>
+                    </div>
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-md sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    <h3>Hello</h3>
-                    <p>Lorem ipsum dolor sit amet</p>
+                <div class="p-6 ">
+                    <h3 class="mb-4 text-lg text-gray-700">Paiements validé</h3>
+                    <div class="flex justify-between font-bold text-3xl text-gray-500">
+                        <p>2</p>
+                        <i class="bi bi-cart-check-fill"></i>
+                    </div>
                 </div>
             </div>
         </div>
         <div>
             <div
-                class="mt-6 relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white 
-                shadow-md sm:rounded-lg">
+                class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white 
+                shadow-md  sm:rounded-t">
                 <div class="flex justify-between">
                     <div>
                         <button
@@ -39,11 +51,19 @@
                     </div>
                     <div class="mt-2">
                         <input type="text" name="search" class="h-8" placeholder="Search">
-                        <button class="mr-6 py-1 px-3 font-semibold bg-green-500 hover:bg-green-600 transition ease-in-out text-white">
-                        SEARCH</button>
+                        <button
+                            class="mr-6 py-1 px-3 font-semibold bg-green-500 hover:bg-green-600 transition ease-in-out text-white">
+                            SEARCH</button>
                     </div>
                 </div>
-                <table class="w-full text-left table-auto min-w-max text-slate-800">
+            </div>
+            <div
+                class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white 
+                shadow-md sm:rounded-b">
+                <div class="flex justify-center text-2xl my-3 text-gray-600">
+                    <h2>CIRCUIT D'APPROBATION DE REQUETES</h2>
+                </div>
+                <table class="w-full text-left table-auto  min-w-max text-slate-800">
                     <thead>
                         <tr class="text-black border-b">
                             <th class="p-4">
@@ -116,7 +136,7 @@
                             </td>
                             <td class="p-4">
                                 <p
-                                    class="text-xs shadow shadow-black p-2 uppercase font-semibold text-center cursor-pointer">
+                                    class="text-xs hover:shadow-transparent hover:border transition ease-in-out duration-500 shadow shadow-black p-2 uppercase font-semibold text-center cursor-pointer">
                                     en cours
                                 </p>
                             </td>
@@ -142,9 +162,11 @@
                                 <button
                                     class="bg-red-500 px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
                             </td>
-                            <td class="p-4">
-                                <button class="text-purple-800 border border-purple-800 my-2 px-3 pb-1 rounded">requête</button>
-                                <button class="text-red-800 border border-red-800 my-2 px-3 pb-1 rounded">Paiements</button>
+                            <td class="grid grid-cols-1">
+                                <button
+                                    class="text-purple-800 border border-purple-800 my-2 px-3 pb-1 rounded">requête</button>
+                                <button
+                                    class="text-red-800 border border-red-800 mb-1 px-3 pb-1 rounded">Paiements</button>
                             </td>
                         </tr>
                     </tbody>
