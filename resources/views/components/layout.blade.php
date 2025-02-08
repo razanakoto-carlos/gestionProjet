@@ -52,18 +52,51 @@
         <aside
             class="bg-white shadow-lg sm:rounded-lg text-gray-500 w-[14rem] flex flex-col p-4 space-y-6 absolute md:relative inset-y-0 left-0 transform md:translate-x-0 transition duration-200 ease-in-out">
             <!-- Sidebar Navigation -->
-            <nav>
-                <ul class="space-y-2 mt-12">
-                    <li>
-                        <div id="handlecliked"
-                            class="text-black transition-all ease-in-out hover:bg-gray-800 hover:w-full hover:font-semibold
-                            p-1 hover:rounded hover:text-white cursor-pointer">
-                            Approbation requêtes
-                            <i id="bi-btn" class="bi bi-chevron-up"></i>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
+            <x-dropdown-menu>
+                <x-slot name='trigger'>
+                    <div tabindex="0" id="handlecliked"
+                        class="mt-12 text-black cursor-pointer hover:bg-gray-800 hover:w-full hover:font-semibold transition-all ease-in-out
+                                p-1 hover:rounded hover:text-white focus:bg-gray-800 
+                                focus:font-semibold focus:p-1 focus:rounded focus:text-white">
+                        Approbation requêtes
+                        <i id="bi-btn" class="bi bi-chevron-up"></i>
+                    </div>
+                    </a>
+                </x-slot>
+                <x-slot name='content'>
+                    <nav>
+                        <ul>
+                            <li>
+                                <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">>
+                                    Rsp planification Suivi-
+                                    <br>Evaluation (RSE)</a>
+                            </li>
+                            <li>
+                                <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">> Rsp
+                                    Resp Sauvegarde Env/le et Sociale (RSENV)</a>
+                            </li>
+                            <li>
+                                <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">> Bureau
+                                    des Marchés (RPM)</a>
+                            </li>
+                            <li>
+                                <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">> Rsp
+                                    Admin et Financier (RAF)</a>
+                            </li>
+                            <li>
+                                <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">> Rsp
+                                    Audit Interne (RAI)</a>
+                            </li>
+
+                            <li> <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">> Charge
+                                    des Programmes (CP)</a></li>
+                            <li><a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">>
+                                    Coordonnateur de Projet (DP)</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </x-slot>
+            </x-dropdown-menu>
         </aside>
         <!-- Main Content (Starts Below Navbar) -->
         <div class="flex-1 p-6 overflow-auto  bg-[#EBEFF2]">
