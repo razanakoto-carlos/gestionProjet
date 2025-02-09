@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Circuit d'approbation de requêtes</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -50,16 +50,15 @@
 
         <!-- Sidebar (Starts Below Navbar) -->
         <aside
-            class="bg-white shadow-lg sm:rounded-lg text-gray-500 w-[14rem] flex flex-col p-4 space-y-6 absolute md:relative inset-y-0 left-0 transform md:translate-x-0 transition duration-200 ease-in-out">
+            class="bg-white shadow-lg sm:rounded-lg text-gray-500 w-[14rem] flex flex-col px-2 py-4 absolute md:relative md:translate-x-0">
             <!-- Sidebar Navigation -->
             <x-dropdown-menu>
                 <x-slot name='trigger'>
-                    <div tabindex="0" id="handlecliked"
-                        class="mt-12 text-black cursor-pointer hover:bg-gray-800 hover:w-full hover:font-semibold transition-all ease-in-out
+                    <div tabindex="0"
+                        class="mt-12 my-4 text-black cursor-pointer hover:bg-gray-800 hover:w-full hover:font-semibold transition-all
                                 p-1 hover:rounded hover:text-white focus:bg-gray-800 
                                 focus:font-semibold focus:p-1 focus:rounded focus:text-white">
                         Approbation requêtes
-                        <i id="bi-btn" class="bi bi-chevron-up"></i>
                     </div>
                     </a>
                 </x-slot>
@@ -67,36 +66,99 @@
                     <nav>
                         <ul>
                             <li>
-                                <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">>
+                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">>
                                     Rsp planification Suivi-
                                     <br>Evaluation (RSE)</a>
                             </li>
                             <li>
-                                <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">> Rsp
+                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">> Rsp
                                     Resp Sauvegarde Env/le et Sociale (RSENV)</a>
                             </li>
                             <li>
-                                <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">> Bureau
+                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">> Bureau
                                     des Marchés (RPM)</a>
                             </li>
                             <li>
-                                <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">> Rsp
+                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">> Rsp
                                     Admin et Financier (RAF)</a>
                             </li>
                             <li>
-                                <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">> Rsp
+                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">> Rsp
                                     Audit Interne (RAI)</a>
                             </li>
 
-                            <li> <a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">> Charge
+                            <li> <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">> Charge
                                     des Programmes (CP)</a></li>
-                            <li><a class="block text-gray-700 text-nowrap overflow-hidden mb-2" href="#">>
+                            <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">>
                                     Coordonnateur de Projet (DP)</a>
                             </li>
                         </ul>
                     </nav>
                 </x-slot>
             </x-dropdown-menu>
+            <x-dropdown-menu>
+                <x-slot name='trigger'>
+                    <div tabindex="0" 
+                        class="text-black cursor-pointer hover:bg-gray-800 hover:w-full hover:font-semibold transition-all ease-in-out
+                                p-1 hover:rounded hover:text-white focus:bg-gray-800 
+                                focus:font-semibold focus:p-1 focus:rounded focus:text-white text-nowrap">
+                        Approbation de paiements
+                    </div>
+                    </a>
+                </x-slot>
+                <x-slot name='content'>
+                    <nav>
+                        <ul>
+                            <li>
+                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">>
+                                    Rsp planification Suivi-
+                                    <br>Evaluation (RSE)</a>
+                            </li>
+                            <li>
+                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">> Bureau
+                                    des Marchés (RPM)</a>
+                            </li>
+                            <li>
+                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">> Comptabilite (CPT)</a>
+                            </li>
+                            <li>
+                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">> Rsp
+                                    Admin et Financier (RAF)</a>
+                            </li>
+                            <li>
+                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">> Rsp
+                                    Audit Interne (RAI)</a>
+                            </li>
+
+                            <li> <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">> Charge
+                                    des Programmes (CP)</a></li>
+                            <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                    href="#">>
+                                    Coordonnateur de Projet (CA)</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </x-slot>
+            </x-dropdown-menu>
+            <a href="#"
+                class="my-4 text-black hover:bg-gray-800 hover:font-semibold transition-all
+                 ease-in-out p-1 hover:rounded hover:text-white focus:bg-gray-800 focus:font-semibold focus:p-1 
+                 focus:rounded focus:text-white text-nowrap">
+                Gestion des utilisateus
+            </a>
         </aside>
         <!-- Main Content (Starts Below Navbar) -->
         <div class="flex-1 p-6 overflow-auto  bg-[#EBEFF2]">
