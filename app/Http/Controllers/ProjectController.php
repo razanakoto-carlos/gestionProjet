@@ -20,7 +20,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('Projet.create');
     }
 
     /**
@@ -28,7 +28,29 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom_projet' => 'required|string|max:255',
+            'date' => 'required|date',
+            'fichier.*' => 'file|mimes:png,jpg,pdf,docx',
+        ]);
+
+        $filesPath = [];
+        if($request->hasFile('fichier')){
+            foreach ($request->file('fichier') as $file) {
+                $filename = time()."_".$file->getClientOriginalName();
+                $file->storeAs('uploads',$filename, 'public');
+                $filesPath[] = 'uploads/'.$filename ;//Ajouter le chemin du fichier au tableau
+            }
+        }
+
+        //Sauvegarder le projet
+        $project = new Project;
+        $project->nom_projet = $request->input('nom_projet');
+        $project->date = $request->input('date');
+        $project->fichier = json_encode($filesPath); // Stocker les chemins des fichiers sous forme de JSON
+        $project->save();
+
+        return redirect()->route('dashboard');
     }
 
     /**

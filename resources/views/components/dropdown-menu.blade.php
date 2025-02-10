@@ -2,7 +2,7 @@
     <div @click="open = ! open">
         {{ $trigger }}
     </div>
-
+    
     <div x-show="open" style="display: none;" @click="open = false">
         <div>
             {{ $content }}

@@ -36,7 +36,7 @@
                         @csrf
                         <button type="submit"
                             class="text-md bg-white text-gray-700 hover:text-gray-900 px-3 py-2 rounded">
-                            <i class="bi bi-box-arrow-in-left"></i>Log Out
+                            <i class="bi bi-box-arrow-in-left"></i>Se deconnecter
                         </button>
                     </form>
                 </x-slot>
@@ -58,7 +58,7 @@
                         class="mt-12 my-4 text-black cursor-pointer hover:bg-gray-800 hover:w-full hover:font-semibold transition-all
                                 p-1 hover:rounded hover:text-white focus:bg-gray-800 
                                 focus:font-semibold focus:p-1 focus:rounded focus:text-white">
-                        Approbation requêtes
+                        <i class="bi bi-card-list mx-1 text-lg "></i>Approbation requêtes
                     </div>
                     </a>
                 </x-slot>
@@ -105,11 +105,11 @@
             </x-dropdown-menu>
             <x-dropdown-menu>
                 <x-slot name='trigger'>
-                    <div tabindex="0" 
-                        class="text-black cursor-pointer hover:bg-gray-800 hover:w-full hover:font-semibold transition-all ease-in-out
+                    <div tabindex="0"
+                        class="mb-4 text-black cursor-pointer hover:bg-gray-800 hover:w-full hover:font-semibold transition-all ease-in-out
                                 p-1 hover:rounded hover:text-white focus:bg-gray-800 
-                                focus:font-semibold focus:p-1 focus:rounded focus:text-white text-nowrap">
-                        Approbation de paiements
+                                focus:font-semibold focus:p-1 focus:rounded focus:text-white text-nowrap overflow-hidden">
+                        <i class="bi bi-cash mx-1"></i>Approbation de paiements
                     </div>
                     </a>
                 </x-slot>
@@ -154,10 +154,11 @@
                 </x-slot>
             </x-dropdown-menu>
             <a href="#"
-                class="my-4 text-black hover:bg-gray-800 hover:font-semibold transition-all
+                class=" text-black hover:bg-gray-800 hover:font-semibold transition-all
                  ease-in-out p-1 hover:rounded hover:text-white focus:bg-gray-800 focus:font-semibold focus:p-1 
                  focus:rounded focus:text-white text-nowrap">
-                Gestion des utilisateus
+                <i class="bi bi-people-fill mx-1"></i>Gestion des Utilisateus
+
             </a>
         </aside>
         <!-- Main Content (Starts Below Navbar) -->
