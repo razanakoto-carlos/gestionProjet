@@ -78,9 +78,9 @@
                 </thead>
                 <tbody>
                     @foreach ($projects as $project)
-                        <tr>
+                        <tr class="border-b">
                             <td class="p-4">
-                                <p class="text-sm font-semibold">
+                                <p class="text-md">
                                     {{ $project->nom_projet }}
                                 </p>
                             </td>
@@ -96,18 +96,18 @@
                             </td>
                             <td class="p-4">
                                 <p
-                                    class="text-xs hover:shadow-transparent hover:border transition ease-in-out duration-500 shadow shadow-black p-2 uppercase font-semibold text-center cursor-pointer">
+                                    class="text-xs hover:shadow-transparent hover:border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer">
                                     en cours
                                 </p>
                             </td>
                             <td class="p-4">
-                                <p href="#" class="text-sm font-semibold ">
+                                <p href="#" class="text-sm">
                                     00.00%
                                 </p>
                             </td>
                             <td class="p-4">
                                 <p
-                                    class="text-xs hover:shadow-transparent hover:border transition ease-in-out duration-500 shadow shadow-black p-2 uppercase font-semibold text-center cursor-pointer">
+                                    class="text-xs hover:shadow-transparent hover:border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                     en cours
                                 </p>
                             </td>
@@ -121,13 +121,13 @@
                             </td>
                             <td class="p-4">
                                 <button
-                                    class="bg-red-500 px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
+                                    class="bg-red-500 hover:bg-red-600 px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
                             </td>
                             <td class="grid grid-cols-1">
                                 <button
-                                    class="text-purple-800 border border-purple-800 my-2 px-3 pb-1 rounded">requête</button>
+                                    class="text-purple-800 border  border-purple-800 hover:text-white hover:bg-purple-800 transition ease-in-out my-2 px-3 pb-1 rounded">requête</button>
                                 <button
-                                    class="text-red-800 border border-red-800 mb-1 px-3 pb-1 rounded">Paiements</button>
+                                    class="text-red-800 border border-red-800 mb-1 hover:text-white transition ease-in-out hover:bg-red-800  px-3 pb-1 rounded">Paiements</button>
                             </td>
                         </tr>
                     @endforeach

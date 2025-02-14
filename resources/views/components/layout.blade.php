@@ -64,35 +64,35 @@
                 </x-slot>
                 <x-slot name='content'>
                     <nav>
-                        <ul>
-                            <li>
+                        <ul >
+                            <li class="border-b-2">
                                 <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">>
                                     Rsp planification Suivi-
                                     <br>Evaluation (RSE)</a>
                             </li>
-                            <li>
+                            <li class="border-b-2">
                                 <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">> Rsp
                                     Resp Sauvegarde Env/le et Sociale (RSENV)</a>
                             </li>
-                            <li>
+                            <li class="border-b-2">
                                 <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">> Bureau
                                     des Marchés (RPM)</a>
                             </li>
-                            <li>
+                            <li class="border-b-2">
                                 <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">> Rsp
                                     Admin et Financier (RAF)</a>
                             </li>
-                            <li>
+                            <li class="border-b-2">
                                 <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">> Rsp
                                     Audit Interne (RAI)</a>
                             </li>
 
-                            <li> <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                            <li class="border-b-2"> <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">> Charge
                                     des Programmes (CP)</a></li>
                             <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
@@ -116,33 +116,33 @@
                 <x-slot name='content'>
                     <nav>
                         <ul>
-                            <li>
+                            <li class="border-b-2">
                                 <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">>
                                     Rsp planification Suivi-
                                     <br>Evaluation (RSE)</a>
                             </li>
-                            <li>
+                            <li class="border-b-2">
                                 <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">> Bureau
                                     des Marchés (RPM)</a>
                             </li>
-                            <li>
+                            <li class="border-b-2">
                                 <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">> Comptabilite (CPT)</a>
                             </li>
-                            <li>
+                            <li class="border-b-2">
                                 <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">> Rsp
                                     Admin et Financier (RAF)</a>
                             </li>
-                            <li>
+                            <li class="border-b-2">
                                 <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">> Rsp
                                     Audit Interne (RAI)</a>
                             </li>
 
-                            <li> <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                            <li class="border-b-2"> <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
                                     href="#">> Charge
                                     des Programmes (CP)</a></li>
                             <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('fichier')->nullable();
             $table->integer('r_rse')->default(0);
             $table->integer('r_bm')->default(0);
+            $table->integer('r_rsenv')->default(0);
             $table->integer('r_raf')->default(0);
             $table->integer('r_rai')->default(0);
             $table->integer('r_cp')->default(0);
