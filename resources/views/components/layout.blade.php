@@ -153,12 +153,11 @@
                     </nav>
                 </x-slot>
             </x-dropdown-menu>
-            <a href="#"
+            <a tabindex="0" href="{{route('profile.index')}}"
                 class=" text-black hover:bg-gray-800 hover:font-semibold transition-all
                  ease-in-out p-1 hover:rounded hover:text-white focus:bg-gray-800 focus:font-semibold focus:p-1 
                  focus:rounded focus:text-white text-nowrap">
                 <i class="bi bi-people-fill mx-1"></i>Gestion des Utilisateus
-
             </a>
         </aside>
         <!-- Main Content (Starts Below Navbar) -->

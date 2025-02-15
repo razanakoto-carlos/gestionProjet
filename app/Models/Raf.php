@@ -6,5 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Raf extends Model
 {
-    //
+   public function project(){
+     return $this->belongsTo(Project::class);
+   }
 }
