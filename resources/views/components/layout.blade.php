@@ -64,41 +64,55 @@
                 </x-slot>
                 <x-slot name='content'>
                     <nav>
-                        <ul >
-                            <li class="border-b-2">
-                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">>
-                                    Rsp planification Suivi-
-                                    <br>Evaluation (RSE)</a>
-                            </li>
-                            <li class="border-b-2">
-                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">> Rsp
-                                    Resp Sauvegarde Env/le et Sociale (RSENV)</a>
-                            </li>
-                            <li class="border-b-2">
-                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">> Bureau
-                                    des Marchés (RPM)</a>
-                            </li>
-                            <li class="border-b-2">
-                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">> Rsp
-                                    Admin et Financier (RAF)</a>
-                            </li>
-                            <li class="border-b-2">
-                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">> Rsp
-                                    Audit Interne (RAI)</a>
-                            </li>
-
-                            <li class="border-b-2"> <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">> Charge
-                                    des Programmes (CP)</a></li>
-                            <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">>
-                                    Coordonnateur de Projet (DP)</a>
-                            </li>
+                        <ul>
+                            @can('isRse')
+                                <li class="border-b-2">
+                                    <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">>
+                                        Rsp planification Suivi-
+                                        <br>Evaluation (RSE)</a>
+                                </li>
+                            @endcan
+                            @can('isRsenv')
+                                <li class="border-b-2">
+                                    <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">> Rsp
+                                        Resp Sauvegarde Env/le et Sociale (RSENV)</a>
+                                </li>
+                            @endcan
+                            @can('isRpm')
+                                <li class="border-b-2">
+                                    <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">> Bureau
+                                        des Marchés (RPM)</a>
+                                </li>
+                            @endcan
+                            @can('isRaf')
+                                <li class="border-b-2">
+                                    <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">> Rsp
+                                        Admin et Financier (RAF)</a>
+                                </li>
+                            @endcan
+                            @can('isRai')
+                                <li class="border-b-2">
+                                    <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">> Rsp
+                                        Audit Interne (RAI)</a>
+                                </li>
+                            @endcan
+                            @can('isCp')
+                                <li class="border-b-2"> <a
+                                        class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">> Charge
+                                        des Programmes (CP)</a></li>
+                            @endcan
+                            @can('isDP')
+                                <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">>
+                                        Coordonnateur de Projet (DP)</a>
+                                </li>
+                            @endcan
                         </ul>
                     </nav>
                 </x-slot>
@@ -116,44 +130,58 @@
                 <x-slot name='content'>
                     <nav>
                         <ul>
-                            <li class="border-b-2">
-                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">>
-                                    Rsp planification Suivi-
-                                    <br>Evaluation (RSE)</a>
-                            </li>
-                            <li class="border-b-2">
-                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">> Bureau
-                                    des Marchés (RPM)</a>
-                            </li>
-                            <li class="border-b-2">
-                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">> Comptabilite (CPT)</a>
-                            </li>
-                            <li class="border-b-2">
-                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">> Rsp
-                                    Admin et Financier (RAF)</a>
-                            </li>
-                            <li class="border-b-2">
-                                <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">> Rsp
-                                    Audit Interne (RAI)</a>
-                            </li>
-
-                            <li class="border-b-2"> <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">> Charge
-                                    des Programmes (CP)</a></li>
-                            <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                    href="#">>
-                                    Coordonnateur de Projet (CA)</a>
-                            </li>
+                            @can('isRse')
+                                <li class="border-b-2">
+                                    <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">>
+                                        Rsp planification Suivi-
+                                        <br>Evaluation (RSE)</a>
+                                </li>
+                            @endcan
+                            @can('isRpm')
+                                <li class="border-b-2">
+                                    <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">> Bureau
+                                        des Marchés (RPM)</a>
+                                </li>
+                            @endcan
+                            @can('isCpt')
+                                <li class="border-b-2">
+                                    <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">> Comptabilite (CPT)</a>
+                                </li>
+                            @endcan
+                            @can('isRaf')
+                                <li class="border-b-2">
+                                    <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">> Rsp
+                                        Admin et Financier (RAF)</a>
+                                </li>
+                            @endcan
+                            @can('isRai')
+                                <li class="border-b-2">
+                                    <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">> Rsp
+                                        Audit Interne (RAI)</a>
+                                </li>
+                            @endcan
+                            @can('isCp')
+                                <li class="border-b-2"> <a
+                                        class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">> Charge
+                                        des Programmes (CP)</a></li>
+                            @endcan
+                            @can('isCp')
+                                <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
+                                        href="#">>
+                                        Coordonnateur de Projet (CA)</a>
+                                </li>
+                            @endcan
                         </ul>
                     </nav>
                 </x-slot>
             </x-dropdown-menu>
-            <a tabindex="0" href="{{route('profile.index')}}"
+            <a tabindex="0" href="{{ route('profile.index') }}"
                 class=" text-black hover:bg-gray-800 hover:font-semibold transition-all
                  ease-in-out p-1 hover:rounded hover:text-white focus:bg-gray-800 focus:font-semibold focus:p-1 
                  focus:rounded focus:text-white text-nowrap">
