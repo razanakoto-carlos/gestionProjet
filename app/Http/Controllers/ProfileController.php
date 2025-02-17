@@ -8,7 +8,9 @@ use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -21,27 +23,61 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(User $user): View
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
+        return view('profile.edit', ['user' => $user]);
     }
 
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request, $id)
     {
-        $request->user()->fill($request->validated());
+        $user = User::find($id);
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required | email | max:255 | unique:users,email,' . $id,
+            'image_user' => 'nullable|image|mimes:jpg,jpeg,png|max:2024',
+            'current_password' => 'nullable | current_password',
+            'password' => 'nullable|confirmed|min:8',
+        ]);
+
+
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+
+        // $filePath = $request->file('image_user')->store('public/images');
+        // $fileName = basename($filePath);  // Extract the filename
+
+
+        if ($request->hasFile('image_user')) {
+            // Supprimer l'ancienne image si elle existe
+            if ($user->image_user) {
+                Storage::delete('images/' . $user->image_user);
+            }
+
+
+            // Télécharger la nouvelle image
+            $fileName = time() . '.' . $request->file('image_user')->extension();
+            $request->file('image_user')->storeAs('images', $fileName);
+
+            // Mettre à jour le champ image_user dans la base de données
+            $user->image_user = $fileName;
         }
 
-        $request->user()->save();
+        // if ($request->filled('current_password') && $request->filled('password')) {
+        //     if (Hash::check($request->input('current_password'), $user->password)) {
+        //         $user->password = hash::make($request->input('password'));
+        //     } else {
+        //         return back()->withErrors(['current_password' => 'The current password is incorrect.']);
+        //     }
+        // }
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        $user->save();
+
+        return redirect()->route('profile.index')->with('status', 'profile-updated');
     }
 
     /**

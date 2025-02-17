@@ -37,6 +37,7 @@ class RegisteredUserController extends Controller
         ]);
 
         $role = Role::where('name', 'Autres')->first();
+
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
