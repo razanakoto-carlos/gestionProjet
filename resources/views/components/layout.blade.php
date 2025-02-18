@@ -25,9 +25,18 @@
             <x-dropdown>
                 <x-slot name="trigger">
                     <div class="flex justify-center items-center cursor-pointer">
-                        <img src="{{ asset('images/luffy.jpg') }}" alt="User Avatar" class="w-10 h-10 rounded-full">
-                        <p>{{ Auth::user()->name }}</p>
-                        <i class="bi bi-chevron-down mx-3"></i>
+                        @php
+                            $user = Auth::user();
+                        @endphp
+                        @if ($user->image_user)
+                            <img src="{{ asset('storage/images/'.$user->image_user) }}" alt="User Avatar"
+                                class="w-10 h-10 rounded-full object-cover">
+                        @else
+                            <img src="{{ asset('images/default-user.jpg') }}" alt="User Avatar"
+                                class="w-10 h-10 rounded-full object-cover">
+                        @endif
+                        <p class="ml-1 capitalize">{{ $user->name }}</p>
+                        <i class="bi bi-chevron-down mx-2"></i>
                     </div>
                 </x-slot>
                 <x-slot name="content">

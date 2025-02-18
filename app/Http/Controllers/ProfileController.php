@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\View\View;
-
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests; 
 class ProfileController extends Controller
 {
+    use AuthorizesRequests;
+    
     public function index(): View
     {
         $users = User::all();
@@ -23,9 +25,15 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(User $user): View
+    public function edit($id): View
     {
-        return view('profile.edit', ['user' => $user]);
+        $user = User::findOrFail($id);
+        $this->authorize('isOwner', $user);
+        $roles = Role::all();
+        return view('profile.edit', [
+            'user' => $user,
+            'roles' => $roles,
+        ]);
     }
 
     /**
@@ -33,50 +41,41 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $user = User::find($id);
-
+        $user = User::findorFail($id);
+        $user_auth = Auth::user();
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required | email | max:255 | unique:users,email,' . $id,
-            'image_user' => 'nullable|image|mimes:jpg,jpeg,png|max:2024',
-            'current_password' => 'nullable | current_password',
             'password' => 'nullable|confirmed|min:8',
+            'image_user' => 'nullable|image|mimes:jpg,jpeg,png|max:2024',
+            'role_id' => 'required|exists:roles,id',
         ]);
+        
 
-
-
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-
-        // $filePath = $request->file('image_user')->store('public/images');
-        // $fileName = basename($filePath);  // Extract the filename
-
+        $user->name = $request->name;
+        $user->email = $request->email;
+        if ($user_auth->role->name === 'DP') {
+            $user->role_id = $request->role_id;
+        }
+     
 
         if ($request->hasFile('image_user')) {
             // Supprimer l'ancienne image si elle existe
-            if ($user->image_user) {
+            if ($user->image_user && Storage::exists('images/' .$user->image_user)) {
                 Storage::delete('images/' . $user->image_user);
             }
-
-
             // Télécharger la nouvelle image
             $fileName = time() . '.' . $request->file('image_user')->extension();
             $request->file('image_user')->storeAs('images', $fileName);
-
             // Mettre à jour le champ image_user dans la base de données
             $user->image_user = $fileName;
         }
 
-        // if ($request->filled('current_password') && $request->filled('password')) {
-        //     if (Hash::check($request->input('current_password'), $user->password)) {
-        //         $user->password = hash::make($request->input('password'));
-        //     } else {
-        //         return back()->withErrors(['current_password' => 'The current password is incorrect.']);
-        //     }
-        // }
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->input('password'));
+        }
 
         $user->save();
-
         return redirect()->route('profile.index')->with('status', 'profile-updated');
     }
 

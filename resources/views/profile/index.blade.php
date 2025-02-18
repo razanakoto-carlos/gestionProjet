@@ -6,10 +6,9 @@
                 <h2>GESTION D'UTILISATEUR</h2>
             </div>
         </div>
-        <div
-            class="w-full h-full overflow-y-hidden text-gray-700 bg-white 
+        <div class="w-full h-full overflow-y-hidden text-gray-700 bg-white 
                 shadow-md sm:rounded-b">
-            <table class="w-full text-left table-auto min-w-max text-slate-800">
+            <table class="w-auto text-left table-auto min-w-max text-slate-800">
                 <thead>
                     <tr class="text-black border-b">
                         <th class="p-3 text-md font-semibold">
@@ -32,27 +31,34 @@
                 <tbody>
                     @foreach ($users as $user)
                         <tr class="border-b">
-                            <td class="p-2">
+                            <td class="py-2 px-3">
                                 @if ($user->image_user)
-                                    <img class="w-10 h-10 rounded-full" src="{{ asset('storage/images/'.$user->image_user)}}" alt="profil d'utilisateur">
+                                    <img class="w-10 h-10 rounded-full object-cover"
+                                        src="{{ asset('storage/images/' . $user->image_user) }}"
+                                        alt="profil d'utilisateur">
                                 @else
-                                    <img class="w-10 h-10 rounded-full" src="{{ asset('images/default-user.jpg') }}"
+                                    <img class="w-12 h-12 rounded-full" src="{{ asset('images/default-user.jpg') }}"
                                         alt="utilisateur">
                                 @endif
                             </td>
-                            <td class="p-2 text-sm capitalize">
-                                {{ $user->name }}
+                            <td class="py-2 px-3">
+                                <p class="capitalize font-medium">{{ $user->name }}</p>
+                                <i class="bi bi-envelope-fill mr-1"></i>{{ $user->email }}
                             </td>
-                            <td class="p-2 text-sm">
+                            <td class="py-2 px-3 text-xs">
                                 {{ $user->role->name }}
                             </td>
-                            <td class="p-2">
-                                <a href="{{ route('profile.edit', $user) }}"
-                                    class="bg-blue-500 hover:bg-blue-600 px-4 py-1 border shadow-md text-white font-bold">MODIFIER</a>
+                            <td class="py-2 px-3">
+                                @if (Auth::id() === $user->id || (Auth::user()->role && Auth::user()->role->name === 'DP'))
+                                    <a href="{{ route('profile.edit', $user->id) }}"
+                                        class="bg-blue-500 hover:bg-blue-600 px-4 py-1 hover:shadow-none transition border shadow-md text-white font-bold">MODIFIER</a>
+                                @endif
                             </td>
-                            <td class="p-2">
-                                <button
-                                    class="bg-red-500 hover:bg-red-600 px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
+                            <td class="py-2 px-3">
+                                @if (Auth::id() === $user->id || (Auth::user()->role && Auth::user()->role->name === 'DP'))
+                                    <button
+                                        class="bg-red-500 hover:bg-red-600 hover:shadow-none px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

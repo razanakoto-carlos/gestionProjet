@@ -8,17 +8,13 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-                <div class="max-w-xl">
+                <div class="w-full">
                     <section>
                         <header>
-                            <h2 class="text-lg font-medium text-gray-900">
-                                {{ __('Profile Information') }}
+                            <h2 class="text-lg font-semibold text-gray-700">
+                                {{ __('Modification d\'utilisateur') }}
                             </h2>
                         </header>
-
-                        {{-- <form id="send-verification" method="post" action="{{ route('verification.send') }}">
-                            @csrf
-                        </form> --}}
 
                         <form method="post" action="{{ route('profile.update', $user->id) }}" class="mt-6 space-y-6"
                             enctype="multipart/form-data">
@@ -26,78 +22,83 @@
                             @method('put')
 
                             <div>
-                                <x-input-label for="name" :value="__('Name')" />
-                                <x-text-input id="name" name="name" type="text" class="mt-1 block w-full"
-                                    :value="old('name', $user->name)" required autofocus autocomplete="name" />
+                                <div class="flex flex-row text-center items-center">
+                                    <x-input-label class="mr-12 text-lg text-gray-500 font-semibold" for="name"
+                                        :value="__('Nom')" />
+                                    <x-text-input id="name" name="name" type="text" class="block w-full h-8"
+                                        :value="old('name', $user->name)" required autofocus autocomplete="name" />
+                                </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('name')" />
                             </div>
 
                             <div>
-                                <x-input-label for="email" :value="__('Email')" />
-                                <x-text-input id="email" name="email" type="email" class="mt-1 block w-full"
-                                    :value="old('email', $user->email)" required autocomplete="username" />
+                                <div class="flex flex-row text-center items-center">
+                                    <x-input-label class="mr-12 text-lg text-gray-500 font-semibold" for="email"
+                                        :value="__('Email')" />
+                                    <x-text-input id="email" name="email" type="email" class="h-8 block w-full"
+                                        :value="old('email', $user->email)" required autocomplete="username" />
+                                </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
-                                {{-- @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && !$user->hasVerifiedEmail())
-                                    <div>
-                                        <p class="text-sm mt-2 text-gray-800">
-                                            {{ __('Your email address is unverified.') }}
-
-                                            <button form="send-verification"
-                                                class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                                                {{ __('Click here to re-send the verification email.') }}
-                                            </button>
-                                        </p>
-
-                                        @if (session('status') === 'verification-link-sent')
-                                            <p class="mt-2 font-medium text-sm text-green-600">
-                                                {{ __('A new verification link has been sent to your email address.') }}
-                                            </p>
-                                        @endif
+                            </div>
+                            {{-- Role d'utilisateur --}}
+                            @can('isDP')
+                                <div>
+                                    <div class="flex flex-row text-center items-center">
+                                        <x-input-label class="mr-14 text-lg text-gray-500 font-semibold" for="role_id"
+                                            :value="__('Role')" />
+                                        <select name="role_id" id="role_id"
+                                            class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
+                                            <option value="">Selectionner un role</option>
+                                            @foreach ($roles as $role)
+                                                <option value="{{ $role->id }}"
+                                                    {{ old('role_id', $user->role_id) == $role->id ? 'selected' : '' }}>
+                                                    {{ $role->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-                                @endif --}}
+                                    <x-input-error class="mt-2" :messages="$errors->get('role_id')" />
+                                </div>
+                            @endcan
+                            {{-- Mot de passe --}}
+                            <div>
+                                <div class="flex flex-row text-center items-center">
+                                    <x-input-label class="mr-6 text-lg text-gray-500 font-semibold" for="password"
+                                        :value="__('Password')" />
+                                    <x-text-input id="password" name="password" type="password"
+                                        class="mt-1 h-8 block w-full" autocomplete="password"
+                                        placeholder="Entrez un nouveau mot de passe (laissez vide pour conserver l'actuel)" />
+                                </div>
+                                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
                             </div>
                             {{-- Image d'utilisateur --}}
                             <div>
-                                <x-input-label for="image_user" :value="__('Image')" />
-                                <x-text-input id="image_user" name="image_user" type="file" class="mt-2 block w-full"
-                                    :value="old('image_user', $user->image_user)" />
+                                @if ($user->image_user)
+                                    <div class="flex flex-row text-center items-center">
+                                        <x-input-label class="mr-12 text-lg text-gray-500 font-semibold" for="apercu"
+                                            :value="__('Aperçu')" />
+                                        <img class="w-12 h-12 mb-3 rounded-full object-cover"
+                                            src="{{ asset('storage/images/' . $user->image_user) }}" alt="">
+                                    </div>
+                                @endif
+                                <div class="flex flex-row text-center items-center">
+                                    <x-input-label class="mr-12 text-lg text-gray-500 font-semibold" for="image_user"
+                                        :value="__('Image')" />
+                                    <x-text-input id="image_user" name="image_user" type="file"
+                                        class="block w-full" />
+                                </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('image_user')" />
                             </div>
-                            {{-- Mot de passe --}}
-                            <div>
-                                <x-input-label for="update_password_current_password" :value="__('Current Password')" />
-                                <x-text-input id="update_password_current_password" name="current_password"
-                                    type="password" class="mt-1 block w-full" autocomplete="current-password" />
-                                <x-input-error :messages="$errors->updatePassword->get('current_password')" class="mt-2" />
-                            </div>
-
-                            <div>
-                                <x-input-label for="update_password_password" :value="__('New Password')" />
-                                <x-text-input id="update_password_password" name="password" type="password"
-                                    class="mt-1 block w-full" autocomplete="new-password" />
-                                <x-input-error :messages="$errors->updatePassword->get('password')" class="mt-2" />
-                            </div>
-
-                            <div>
-                                <x-input-label for="update_password_password_confirmation" :value="__('Confirm Password')" />
-                                <x-text-input id="update_password_password_confirmation" name="password_confirmation"
-                                    type="password" class="mt-1 block w-full" autocomplete="new-password" />
-                                <x-input-error :messages="$errors->updatePassword->get('password_confirmation')" class="mt-2" />
-                            </div>
-
-
                             <div class="flex items-center gap-4">
-                                <x-primary-button>{{ __('Save') }}</x-primary-button>
-
+                                <button type="submit"
+                                    class="inline-flex items-center px-4 py-1 bg-blue-600 border rounded-md font-semibold text-white uppercase 
+                                hover:bg-blue-700 focus:bg-blue-700transition ease-in-out duration-150">Modifier</button>
                                 @if (session('status') === 'profile-updated')
                                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
-                                        class="text-sm text-gray-600">{{ __('Saved.') }}</p>
+                                        class="text-sm text-gray-600">{{ __('Modifier.') }}</p>
                                 @endif
                             </div>
                         </form>
                     </section>
-
                 </div>
             </div>
         </div>
