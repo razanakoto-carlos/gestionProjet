@@ -56,8 +56,13 @@
                             </td>
                             <td class="py-2 px-3">
                                 @if (Auth::id() === $user->id || (Auth::user()->role && Auth::user()->role->name === 'DP'))
-                                    <button
-                                        class="bg-red-500 hover:bg-red-600 hover:shadow-none px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
+                                    <form id="delete-form" action="{{ route('profile.destroy', $user->id) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onclick="confirmDelete(this)"
+                                            class="bg-red-500 hover:bg-red-600 hover:shadow-none px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
+                                    </form>
                                 @endif
                             </td>
                         </tr>
@@ -65,5 +70,23 @@
                 </tbody>
             </table>
         </div>
-    </div>
+        <script>
+            function confirmDelete(button) {
+                Swal.fire({
+                    title: 'Êtes-vous sûr ?',
+                    text: "Cette action est irréversible !",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Oui, supprimer !',
+                    cancelButtonText: 'Annuler'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // Submit the closest form to the clicked button
+                        button.closest('form').submit();
+                    }
+                });
+            }
+        </script>
 </x-card-dashboard>

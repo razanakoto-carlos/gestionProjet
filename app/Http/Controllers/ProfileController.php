@@ -12,11 +12,12 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests; 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+
 class ProfileController extends Controller
 {
     use AuthorizesRequests;
-    
+
     public function index(): View
     {
         $users = User::all();
@@ -43,25 +44,27 @@ class ProfileController extends Controller
     {
         $user = User::findorFail($id);
         $user_auth = Auth::user();
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required | email | max:255 | unique:users,email,' . $id,
             'password' => 'nullable|confirmed|min:8',
             'image_user' => 'nullable|image|mimes:jpg,jpeg,png|max:2024',
-            'role_id' => 'required|exists:roles,id',
+            'role_id' => 'nullable|exists:roles,id',
         ]);
-        
+
 
         $user->name = $request->name;
         $user->email = $request->email;
+
         if ($user_auth->role->name === 'DP') {
             $user->role_id = $request->role_id;
         }
-     
+
 
         if ($request->hasFile('image_user')) {
             // Supprimer l'ancienne image si elle existe
-            if ($user->image_user && Storage::exists('images/' .$user->image_user)) {
+            if ($user->image_user && Storage::exists('images/' . $user->image_user)) {
                 Storage::delete('images/' . $user->image_user);
             }
             // Télécharger la nouvelle image
@@ -82,21 +85,21 @@ class ProfileController extends Controller
     /**
      * Delete the user's account.
      */
-    public function destroy(Request $request): RedirectResponse
+    public function destroy(Request $request, $id)
     {
-        $request->validateWithBag('userDeletion', [
-            'password' => ['required', 'current_password'],
-        ]);
+        $user = User::findorFail($id);
 
-        $user = $request->user();
+        $user_auth = Auth::user();
 
-        Auth::logout();
+        $id = (int)$id;
+        if ($user_auth->id === $id) {
+            Auth::logout();
+            $user->delete();
 
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+        }
         $user->delete();
-
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-
-        return Redirect::to('/');
+        return redirect()->route('profile.index')->with('status', 'profile-deleted');
     }
 }

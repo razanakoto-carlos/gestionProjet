@@ -1,6 +1,8 @@
 import './bootstrap';
 import "bootstrap-icons/font/bootstrap-icons.css";
-import './scripts';
+import Swal from 'sweetalert2';
+
+window.Swal = Swal;
 
 import Alpine from 'alpinejs';
 
