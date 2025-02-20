@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Project;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -59,6 +61,12 @@ class AppServiceProvider extends ServiceProvider
 
         Gate::define('nonDp', function($user){
             return $user->role != 'DP';
+        });
+
+        //View in dashboard
+        view::composer('components.card-dashboard', function ($view) {
+            $view->with('projectCount',Project::count());
+            $view->with('userCount', User::count());
         });
     }
 }

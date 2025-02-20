@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Project;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
@@ -88,17 +89,21 @@ class ProfileController extends Controller
     public function destroy(Request $request, $id)
     {
         $user = User::findorFail($id);
-
         $user_auth = Auth::user();
+
+        // Supprimer l'ancienne image si elle existe
+        if ($user->image_user && Storage::exists('images/' . $user->image_user)) {
+            Storage::delete('images/' . $user->image_user);
+        }
 
         $id = (int)$id;
         if ($user_auth->id === $id) {
             Auth::logout();
             $user->delete();
-
             $request->session()->invalidate();
             $request->session()->regenerateToken();
         }
+
         $user->delete();
         return redirect()->route('profile.index')->with('status', 'profile-deleted');
     }
