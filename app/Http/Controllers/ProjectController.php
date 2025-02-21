@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cp;
+use App\Models\Dp;
 use App\Models\Project;
+use App\Models\Raf;
+use App\Models\Rai;
+use App\Models\Rpm;
+use App\Models\Rse;
+use App\Models\Rsenv;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -43,12 +50,65 @@ class ProjectController extends Controller
             }
         }
 
+
         //Sauvegarder le projet
         $project = new Project;
         $project->nom_projet = $request->input('nom_projet');
         $project->date = $request->input('date');
         $project->fichier = json_encode($filesPath); // Stocker les chemins des fichiers sous forme de JSON
         $project->save();
+        //Crée un requette de chaque responsable
+        Rse::create([
+            'project_id' => $project->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+
+        Rsenv::create([
+            'project_id' => $project->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+        Rpm::create([
+            'project_id' => $project->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+        Raf::create([
+            'project_id' => $project->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+        Rai::create([
+            'project_id' => $project->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+        Cp::create([
+            'project_id' => $project->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+        Dp::create([
+            'project_id' => $project->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+
 
         return redirect()->route('dashboard');
     }

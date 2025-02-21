@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('date')->useCurrent();
             $table->integer('avis_favorable')->default(0);
+            $table->text('observations')->nullable();
             $table->unsignedBigInteger('project_id')->unique();
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
             $table->timestamps();
