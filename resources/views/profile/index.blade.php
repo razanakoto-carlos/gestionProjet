@@ -89,4 +89,5 @@
                 });
             }
         </script>
+    </div>
 </x-card-dashboard>

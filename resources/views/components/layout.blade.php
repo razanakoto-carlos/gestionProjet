@@ -77,7 +77,7 @@
                             @can('isRse')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">>
+                                        href="{{route('rse.index')}}">>
                                         Rsp planification Suivi-
                                         <br>Evaluation (RSE)</a>
                                 </li>

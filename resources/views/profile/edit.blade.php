@@ -1,21 +1,15 @@
 <x-card-dashboard>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+    <div class="mt-5 w-full h-full overflow-hidden text-gray-700 bg-white 
+                shadow-md  sm:rounded-t">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-4 space-y-6">
+            <div class="py-4 sm:p-8">
                 <div class="w-full">
                     <section>
                         <header>
-                            <h2 class="text-lg font-semibold text-gray-700">
+                            <h2 class="-ml-6 -pt-4 text-lg font-semibold text-gray-700">
                                 {{ __('Modification d\'utilisateur') }}
                             </h2>
                         </header>
-
                         <form method="post" action="{{ route('profile.update', $user->id) }}" class="mt-6 space-y-6"
                             enctype="multipart/form-data">
                             @csrf
@@ -90,7 +84,7 @@
                             </div>
                             <div class="flex items-center gap-4">
                                 <button type="submit"
-                                    class="inline-flex items-center px-4 py-1 bg-blue-600 border rounded-md font-semibold text-white uppercase 
+                                    class="mt-2 inline-flex items-center px-4 py-1 bg-blue-600 border font-semibold text-white uppercase 
                                 hover:bg-blue-700 focus:bg-blue-700transition ease-in-out duration-150">Modifier</button>
                                 @if (session('status') === 'profile-updated')
                                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"

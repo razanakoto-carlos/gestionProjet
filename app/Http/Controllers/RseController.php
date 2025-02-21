@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Project;
 use App\Models\Rse;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class RseController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::with('rse')->paginate(5);
+        return view('Requettes.Rse.index', compact('projects'));
     }
 
     /**
@@ -42,9 +44,10 @@ class RseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Rse $rse)
+    public function edit($id)
     {
-        //
+        $rse = Rse::findorFail($id);
+        return view('Requettes.Rse.edit',compact('rse'));
     }
 
     /**
