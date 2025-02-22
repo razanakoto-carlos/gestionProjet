@@ -30,7 +30,7 @@ class ProfileController extends Controller
     public function edit($id): View
     {
         $user = User::findOrFail($id);
-        $this->authorize('isOwner', $user);
+        $this->authorize('isOwners', $user);
         $roles = Role::all();
         return view('profile.edit', [
             'user' => $user,
@@ -45,7 +45,6 @@ class ProfileController extends Controller
     {
         $user = User::findorFail($id);
         $user_auth = Auth::user();
-
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required | email | max:255 | unique:users,email,' . $id,

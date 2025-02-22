@@ -27,9 +27,13 @@ class AppServiceProvider extends ServiceProvider
             return $user->role->name === 'RSE' || $user->role->name === 'DP';
         });
 
-        Gate::define('isOwner', function ($authUser, $targetUser) {
+        Gate::define('isOwners', function ($authUser, $targetUser) {
             return $authUser->id === $targetUser->id || $authUser->role->name === 'DP';;
         });
+
+        // Gate::define('isOwner', function ($user) {
+        //     return $user->role->name === 'RSE';
+        // });
 
         Gate::define('isRsenv', function ($user) {
             return $user->role->name === 'RSENV' || $user->role->name === 'DP';
@@ -60,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         Gate::define('nonDp', function($user){
-            return $user->role != 'DP';
+            return $user->role->name != 'DP';
         });
 
         //View in dashboard

@@ -11,6 +11,7 @@ use App\Models\Rpm;
 use App\Models\Rse;
 use App\Models\Rsenv;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -140,8 +141,23 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Project $project)
+    public function destroy($id)
     {
-        //
+        $project = Project::findorFail($id);
+
+        // Supprimer l'ancienne image si elle existe
+        $filePaths = json_decode($project->fichier, true);
+
+        // Supprimer chaque fichier du système de fichiers
+        if ($filePaths) {
+            foreach ($filePaths as $filePath) {
+                // Vérifier si le fichier existe avant de le supprimer
+                if (Storage::disk('public')->exists($filePath)) {
+                    Storage::disk('public')->delete($filePath);
+                }
+            }
+        }
+        $project->delete();
+        return redirect()->route('dashboard')->with('status', 'project-deleted');
     }
 }

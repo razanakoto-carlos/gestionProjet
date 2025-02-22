@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use App\Models\Rse;
+use Illuminate\Container\Attributes\Auth;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class RseController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -46,6 +50,9 @@ class RseController extends Controller
      */
     public function edit($id)
     {
+        if(!Gate::allows('isRse')){
+            abort(404);
+        }
         $rse = Rse::findorFail($id);
         return view('Requettes.Rse.edit',compact('rse'));
     }
@@ -53,9 +60,10 @@ class RseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Rse $rse)
+    public function update(Request $request, $id)
     {
-        //
+         $rse = Rse::findorFail($id);
+         dd($rse);
     }
 
     /**

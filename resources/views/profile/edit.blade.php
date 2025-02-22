@@ -66,19 +66,17 @@
                             </div>
                             {{-- Image d'utilisateur --}}
                             <div>
-                                @if ($user->image_user)
-                                    <div class="flex flex-row text-center items-center">
-                                        <x-input-label class="mr-12 text-lg text-gray-500 font-semibold" for="apercu"
-                                            :value="__('Aperçu')" />
-                                        <img class="w-12 h-12 mb-3 rounded-full object-cover"
-                                            src="{{ asset('storage/images/' . $user->image_user) }}" alt="">
-                                    </div>
-                                @endif
+                                <div class="flex flex-row text-center items-center">
+                                    <x-input-label class="mr-12 text-lg text-gray-500 font-semibold" for="apercu"
+                                        :value="__('Aperçu')" />
+                                    <img class="w-12 h-12 mb-3 rounded-full object-cover" id="imagePreview"
+                                        src="{{ $user->image_user ? asset('storage/images/' . $user->image_user) : asset('images/default-user.jpg') }}" alt="">
+                                </div>
                                 <div class="flex flex-row text-center items-center">
                                     <x-input-label class="mr-12 text-lg text-gray-500 font-semibold" for="image_user"
                                         :value="__('Image')" />
                                     <x-text-input id="image_user" name="image_user" type="file"
-                                        class="block w-full" />
+                                        class="block w-full" accept="image/*" onchange="previewImage(event)" />
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('image_user')" />
                             </div>
@@ -97,4 +95,14 @@
             </div>
         </div>
     </div>
+    <script>
+        function previewImage(event) {
+            var reader = new FileReader();
+            reader.onload = function(){
+                var output = document.getElementById('imagePreview');
+                output.src = reader.result;
+            };
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    </script>
 </x-card-dashboard>

@@ -93,7 +93,7 @@
                             </td>
                             <td class="p-4">
                                 <p
-                                    class="text-xs hover:shadow-transparent hover:border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer">
+                                    class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer">
                                     en cours
                                 </p>
                             </td>
@@ -104,7 +104,7 @@
                             </td>
                             <td class="p-4">
                                 <p
-                                    class="text-xs hover:shadow-transparent hover:border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                    class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                     en cours
                                 </p>
                             </td>
@@ -112,14 +112,19 @@
                                 <p href="#" class="text-sm font-normal ">
                                     @foreach (json_decode($project->fichier) as $file)
                                         <a href="{{ asset('storage/' . $file) }}" target="_blank"
-                                          class="text-gray-600 hover:underline hover:text-gray-700">{{ basename($file) }}</a><br>
+                                          class="text-gray-600 hover:underline hover:text-gray-800">{{ basename($file) }}</a><br>
                                     @endforeach
                                 </p>
                             </td>
                             <td class="p-4">
-                                <button
-                                    class="bg-red-500 hover:bg-red-600 px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
-                            </td>
+                                <form id="delete-form" action="{{ route('project.destroy', $project->id) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="button" onclick="confirmDelete(this)"
+                                        class="bg-red-500 hover:bg-red-600 hover:shadow-none px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
+                                </form>
+                               </td>
                             <td class="grid grid-cols-1">
                                 <button
                                     class="text-purple-800 border  border-purple-800 hover:text-white hover:bg-purple-800 transition ease-in-out my-2 px-3 pb-1 rounded">requête</button>
@@ -132,4 +137,22 @@
             </table>
         </div>
     </div>
+    <script>
+        function confirmDelete(button) {
+            Swal.fire({
+                title: 'Êtes-vous sûr ?',
+                text: "Cette action est irréversible !",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, supprimer !',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    button.closest('form').submit();
+                }
+            });
+        }
+    </script>
 </x-card-dashboard>

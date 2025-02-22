@@ -50,11 +50,13 @@
                                 Fichier
                             </p>
                         </th>
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Action
-                            </p>
-                        </th>
+                        @can('nonDp')
+                            <th class="p-4">
+                                <p class="text-md leading-none font-semibold">
+                                    Action
+                                </p>
+                            </th>
+                        @endcan
                     </tr>
                 </thead>
                 <tbody>
@@ -67,13 +69,13 @@
                             </td>
                             <td class="p-4">
                                 <p
-                                    class="text-xs hover:shadow-transparent hover:border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                    class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                     Validé
                                 </p>
                             </td>
                             <td class="p-4">
                                 <p
-                                    class="text-xs hover:shadow-transparent hover:border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                    class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                     en cours
                                 </p>
                             </td>
@@ -91,14 +93,16 @@
                                 <p href="#" class="text-sm font-normal ">
                                     @foreach (json_decode($project->fichier) as $file)
                                         <a href="{{ asset('storage/' . $file) }}" target="_blank"
-                                          class="text-gray-600 hover:underline hover:text-gray-700">{{ basename($file) }}</a><br>
+                                            class="text-gray-600 hover:underline hover:text-gray-800">{{ basename($file) }}</a><br>
                                     @endforeach
                                 </p>
                             </td>
-                            <td class="p-4">
-                                <a href="{{route('rse.edit', $project->rse->id)}}"
-                                    class="hover:shadow-transparent hover:border transition ease-in-out duration-300 shadow shadow-gray-700 px-3 py-1 font-semibold text-center">VALIDATION</a>
-                            </td>
+                            @can('nonDp')
+                                <td class="p-4">
+                                    <a href="{{ route('rse.edit', $project->rse->id) }}"
+                                        class="hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 px-3 py-1 font-semibold text-center">VALIDATION</a>
+                                </td>
+                            @endcan
                         </tr>
                     @endforeach
                 </tbody>

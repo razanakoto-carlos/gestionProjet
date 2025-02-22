@@ -18,25 +18,17 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     $projects = Project::all();
     return view('dashboard', compact('projects'));
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     //Projet
     Route::resource('project', ProjectController::class);
 
+    //User
+    Route::resource('profile', ProfileController::class);
+
     //Requettes
     Route::resource('rse',RseController::class);
-
-    //User
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::get('/profile/{user}/edit', [ProfileController::class, 'edit'])
-    ->name('profile.edit');
-    Route::put('/profile/{user}', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile/{id}', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    
-    
-
-
 });
 
 require __DIR__.'/auth.php';
