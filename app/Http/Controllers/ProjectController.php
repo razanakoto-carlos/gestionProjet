@@ -10,11 +10,13 @@ use App\Models\Rai;
 use App\Models\Rpm;
 use App\Models\Rse;
 use App\Models\Rsenv;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
+    use AuthorizesRequests;
     /**
      * Display a listing of the resource.
      */
@@ -28,6 +30,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
+        $this->authorize('isDP');
         return view('Projet.create');
     }
 
@@ -143,6 +146,7 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('isDP');
         $project = Project::findorFail($id);
 
         // Supprimer l'ancienne image si elle existe

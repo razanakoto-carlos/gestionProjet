@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('profile', ProfileController::class);
 
     //Requettes
-    Route::resource('rse',RseController::class);
+    Route::resource('rse', RseController::class);
 });
 
 require __DIR__.'/auth.php';

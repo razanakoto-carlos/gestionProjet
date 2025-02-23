@@ -8,6 +8,7 @@ use Illuminate\Container\Attributes\Auth;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Validator;
 
 class RseController extends Controller
 {
@@ -50,11 +51,11 @@ class RseController extends Controller
      */
     public function edit($id)
     {
-        if(!Gate::allows('isRse')){
+        if (!Gate::allows('isRse')) {
             abort(404);
         }
         $rse = Rse::findorFail($id);
-        return view('Requettes.Rse.edit',compact('rse'));
+        return view('Requettes.Rse.edit', compact('rse'));
     }
 
     /**
@@ -62,8 +63,32 @@ class RseController extends Controller
      */
     public function update(Request $request, $id)
     {
-         $rse = Rse::findorFail($id);
-         dd($rse);
+        if (!Gate::allows('isRse')) {
+            abort(404);
+        }
+        $validator = Validator::make($request->all(), [
+            'observations' => 'required'
+        ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        $rse = Rse::findorFail($id);
+        $project = $rse->project;
+
+        if ($request->input('code_analytique') == 1 && $request->input('conformite_requete') && $request->input('conformite_tdr_ptba')) {
+            $project->r_rse = 1;
+            $project->save();
+        }
+
+        $rse->date = $request->input('date');
+        $rse->code_analytique = $request->input('code_analytique');
+        $rse->conformite_requete = $request->input('conformite_requete');
+        $rse->conformite_tdr_ptba = $request->input('conformite_tdr_ptba');
+        $rse->montant_ptba = $request->input('montant_ptba');
+        $rse->observations = $request->input('observations');
+        $rse->save();
+
+        return redirect()->route('rse.index')->with('message', 'Validation enregistrées !!!' );
     }
 
     /**

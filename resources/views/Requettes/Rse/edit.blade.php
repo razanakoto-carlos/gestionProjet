@@ -10,7 +10,7 @@
                                 {{ __('validation rse') }}
                             </h2>
                         </header>
-                        <form method="post" action="{{route('rse.store', $rse->id)}}" class="mt-6 space-y-6" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('rse.update', $rse->id)}}" class="mt-6 space-y-6">
                             @csrf
                             @method('put')
 
@@ -26,7 +26,7 @@
                             <div>
                                 <div class="flex flex-row text-center items-center">
                                     <x-input-label class="mr-[3.3rem] text-lg text-gray-500 font-semibold text-nowrap"
-                                        for="name" :value="__('Code Analytique')" />
+                                        for="code_analytique" :value="__('Code Analytique')" />
                                     <select name="code_analytique" id="code_analytique"
                                         class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
                                         <option value="0" {{ $rse->code_analytique === 0 ? 'selected' : '' }}>
@@ -42,7 +42,7 @@
                             <div>
                                 <div class="flex flex-row text-center items-center">
                                     <x-input-label class="mr-[4.1rem] text-nowrap text-lg text-gray-500 font-semibold"
-                                        for="date" :value="__('Montant PTBA')" />
+                                        for="montant_ptba" :value="__('Montant PTBA')" />
                                     <x-text-input id="montant_ptba" min="0" step="any" name="montant_ptba"
                                         type="number" class="block w-full h-8" :value="old('montant_ptba', $rse->montant_ptba)" />
                                 </div>
@@ -51,14 +51,14 @@
                             <div>
                                 <div class="flex flex-row text-center items-center">
                                     <x-input-label class="mr-[1.2rem] text-left text-wrap text-lg text-gray-500 font-semibold"
-                                        for="date" :value="__('Conformité De La Requête')" />
+                                        for="conformite_requete" :value="__('Conformité De La Requête')" />
                                     <select name="conformite_requete" id="conformite_requete"
                                         class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
-                                        <option value="0" {{ $rse->code_analytique === 0 ? 'selected' : '' }}>
+                                        <option value="0" {{ $rse->conformite_requete === 0 ? 'selected' : '' }}>
                                         </option>
-                                        <option value="1" {{ $rse->code_analytique === 1 ? 'selected' : '' }}>OUI
+                                        <option value="1" {{ $rse->conformite_requete === 1 ? 'selected' : '' }}>OUI
                                         </option>
-                                        <option value="2" {{ $rse->code_analytique === 2 ? 'selected' : '' }}>NON
+                                        <option value="2" {{ $rse->conformite_requete === 2 ? 'selected' : '' }}>NON
                                         </option>
                                     </select>
                                 </div>
@@ -67,32 +67,32 @@
                             <div>
                                 <div class="flex flex-row text-center items-center">
                                     <x-input-label class="mr-[3rem] max-w-28 text-left text-wrap text-lg text-gray-500 font-semibold"
-                                        for="date" :value="__('Conformité Du TDR Ou PTBA')" />
-                                    <select name="conformite_requete" id="conformite_requete"
+                                        for="conformite_tdr_ptba" :value="__('Conformité Du TDR Ou PTBA')" />
+                                    <select name="conformite_tdr_ptba" id="conformite_tdr_ptba"
                                         class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
-                                        <option value="0" {{ $rse->code_analytique === 0 ? 'selected' : '' }}>
+                                        <option value="0" {{ $rse->conformite_tdr_ptba === 0 ? 'selected' : '' }}>
                                         </option>
-                                        <option value="1" {{ $rse->code_analytique === 1 ? 'selected' : '' }}>OUI
+                                        <option value="1" {{ $rse->conformite_tdr_ptba === 1 ? 'selected' : '' }}>OUI
                                         </option>
-                                        <option value="2" {{ $rse->code_analytique === 2 ? 'selected' : '' }}>NON
+                                        <option value="2" {{ $rse->conformite_tdr_ptba === 2 ? 'selected' : '' }}>NON
                                         </option>
                                     </select>
                                 </div>
-                                <x-input-error class="mt-2" :messages="$errors->get('conformite_requete')" />
+                                <x-input-error class="mt-2" :messages="$errors->get('conformite_tdr_ptba')" />
                             </div>
                             <div>
                                 <div class="flex flex-row">
                                     <x-input-label class="mr-[4.8rem] text-lg text-gray-500 font-semibold" for="observations"
                                         :value="__('Observations')" />
-                                    <textarea class="border border-gray-300 border-solid w-full" name="observations" id="observations" :value="old('observations', $rse->observations)" rows="5"></textarea>
+                                    <textarea class="border border-gray-300 border-solid w-full" name="observations" id="observations" rows="5">{{old('observations', $rse->observations)}}</textarea>
                                 </div>
-                                <x-input-error class="mt-2" :messages="$errors->get('date')" />
+                                <x-input-error class="mt-2" :messages="$errors->get('observations')" />
                             </div>
                             <div class="flex items-center gap-4">
                                 <button type="submit"
                                     class="inline-flex items-center px-4 py-1 bg-blue-600 border font-semibold text-white uppercase 
                                 hover:bg-blue-700 focus:bg-blue-700transition ease-in-out duration-150">Validation</button>
-                                @if (session('status') === 'profile-updated')
+                                @if (session('status') === 'rse-updated')
                                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
                                         class="text-sm text-gray-600">{{ __('Validation.') }}</p>
                                 @endif

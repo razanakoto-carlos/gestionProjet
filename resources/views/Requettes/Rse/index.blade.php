@@ -3,7 +3,7 @@
         <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white 
                 shadow-md  sm:rounded-t ">
             <div class="flex justify-between">
-                <div class="mt-2">
+                <div class="mt-2  ml-4">
                     <input type="text" name="search" class="h-8" placeholder="Search">
                     <button
                         class="mr-6 py-1 px-3 font-semibold bg-green-500 hover:bg-green-600 transition ease-in-out text-white">
@@ -68,21 +68,73 @@
                                 </p>
                             </td>
                             <td class="p-4">
-                                <p
-                                    class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
-                                    Validé
-                                </p>
+                                @if (
+                                    $project->r_rse == 0 ||
+                                        $project->r_bm == 0 ||
+                                        $project->r_raf == 0 ||
+                                        $project->r_rai == 0 ||
+                                        $project->r_cp == 0 ||
+                                        $project->r_dp == 0)
+                                    <p
+                                        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                        en cours
+                                    </p>
+                                @elseif (
+                                    $project->r_rse == 1 &&
+                                        $project->r_bm == 1 &&
+                                        $project->r_raf == 1 &&
+                                        $project->r_rai == 1 &&
+                                        $project->r_cp == 1 &&
+                                        $project->r_dp == 1)
+                                    <p
+                                        class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        Validé
+                                    </p>
+                                @else
+                                    <p
+                                        class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        Non Validé
+                                    </p>
+                                @endif
                             </td>
                             <td class="p-4">
-                                <p
-                                    class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
-                                    en cours
-                                </p>
+                                @if ($project->rse()->count())
+                                    @if (
+                                        $project->rse->code_analytique == 0 ||
+                                            $project->rse->conformite_requete == 0 ||
+                                            $project->rse->conformite_tdr_ptba == 0)
+                                        <p
+                                            class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                            en cours
+                                        </p>
+                                    @elseif ($project->rse->code_analytique == 1)
+                                        <p
+                                            class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                            Validé
+                                        </p>
+                                    @else
+                                        <p
+                                            class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                            Non Validé
+                                        </p>
+                                    @endif
+                                @else
+                                    <p
+                                        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                        Non commencé
+                                    </p>
+                                @endif
                             </td>
                             <td class="p-4">
-                                <p class="text-sm">
-                                    15.00%
-                                </p>
+                                @if ($project->rse()->count())
+                                    <p class="text-sm">
+                                        {{ number_format((($project->rse->conformite_tdr_ptba + $project->rse->code_analytyque + $project->rse->conformite_requete) * 100) / 3, 2) }}%
+                                    </p>
+                                @else
+                                    <p class="text-sm">
+                                        00.00%
+                                    </p>
+                                @endif
                             </td>
                             <td class="p-4">
                                 <p class="text-sm">
