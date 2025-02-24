@@ -63,13 +63,13 @@
                                 Fichier
                             </p>
                         </th>
-                         @can('isDP')
-                         <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Action
-                            </p>
-                        </th>
-                         @endcan
+                        @can('isDP')
+                            <th class="p-4">
+                                <p class="text-md leading-none font-semibold">
+                                    Action
+                                </p>
+                            </th>
+                        @endcan
                         <th class="p-4">
                             <p class="text-md leading-none font-semibold">
                                 Exporter
@@ -90,26 +90,64 @@
                                     {{ $project->date }}
                                 </p>
                             </td>
+                            @if (
+                                $project->r_rse === 0 ||
+                                    $project->r_rsenv === 0 ||
+                                    $project->r_bm === 0 ||
+                                    $project->r_cp === 0 ||
+                                    $project->r_dp === 0 ||
+                                    $project->r_raf === 0 ||
+                                    $project->r_rai === 0)
+                                <td class="p-4">
+                                    <p
+                                        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        en cours
+                                    </p>
+                                </td>
+                            @elseif (
+                                $project->r_rse === 1 &&
+                                    $project->r_rsenv === 1 &&
+                                    $project->r_bm === 1 &&
+                                    $project->r_cp === 1 &&
+                                    $project->r_dp === 1 &&
+                                    $project->r_raf === 1 &&
+                                    $project->r_rai === 1)
+                                <td class="p-4">
+                                    <p
+                                        class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        Validé
+                                    </p>
+                                </td>
+                            @else
+                                <td class="p-4">
+                                    <p
+                                        class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        Non Validé
+                                    </p>
+                                </td>
+                            @endif
+
                             <td class="p-4">
                                 <p class="text-sm">
-                                    15.00%
-                                </p>
-                            </td>
-                            <td class="p-4">
-                                <p
-                                    class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer">
-                                    en cours
-                                </p>
-                            </td>
-                            <td class="p-4">
-                                <p href="#" class="text-sm">
-                                    00.00%
+                                    <x-rating-calculator :ratings="[
+                                        $project->r_rse,
+                                        $project->r_bm,
+                                        $project->r_raf,
+                                        $project->r_rai,
+                                        $project->r_cp,
+                                        $project->r_dp,
+                                    ]" />
                                 </p>
                             </td>
                             <td class="p-4">
                                 <p
                                     class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                     en cours
+                                </p>
+                            </td>
+                            <td class="p-4">
+                                <p href="#" class="text-sm">
+                                    00.00%
                                 </p>
                             </td>
                             <td class="p-4">
@@ -121,15 +159,15 @@
                                 </p>
                             </td>
                             @can('isDP')
-                            <td class="p-4">
-                                <form id="delete-form" action="{{ route('project.destroy', $project->id) }}"
-                                    method="post">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="button" onclick="confirmDelete(this)"
-                                        class="bg-red-500 hover:bg-red-600 hover:shadow-none px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
-                                </form>
-                            </td>
+                                <td class="p-4">
+                                    <form id="delete-form" action="{{ route('project.destroy', $project->id) }}"
+                                        method="post">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" onclick="confirmDelete(this)"
+                                            class="bg-red-500 hover:bg-red-600 hover:shadow-none px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
+                                    </form>
+                                </td>
                             @endcan
                             <td class="grid grid-cols-1">
                                 <button

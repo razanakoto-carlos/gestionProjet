@@ -128,7 +128,11 @@
                             <td class="p-4">
                                 @if ($project->rse()->count())
                                     <p class="text-sm">
-                                        {{ number_format((($project->rse->conformite_tdr_ptba + $project->rse->code_analytyque + $project->rse->conformite_requete) * 100) / 3, 2) }}%
+                                        <x-rating-calculator :ratings="[
+                                            $project->rse->conformite_tdr_ptba,
+                                            $project->rse->code_analytyque,
+                                            $project->rse->conformite_requete,
+                                        ]" />
                                     </p>
                                 @else
                                     <p class="text-sm">
