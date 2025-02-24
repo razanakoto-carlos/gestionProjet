@@ -23,12 +23,14 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     //Projet
     Route::resource('project', ProjectController::class);
+    Route::get('/search', [ProjectController::class , 'search']);
 
     //User
     Route::resource('profile', ProfileController::class);
 
     //Requettes
     Route::resource('rse', RseController::class);
+    Route::get('/search_rse', [RseController::class , 'search']);
 });
 
 require __DIR__.'/auth.php';

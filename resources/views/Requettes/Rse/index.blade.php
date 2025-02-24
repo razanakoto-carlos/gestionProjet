@@ -3,12 +3,12 @@
         <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white 
                 shadow-md  sm:rounded-t ">
             <div class="flex justify-between">
-                <div class="mt-2  ml-4">
+                <form method="get" action="/search_rse" class="mt-2 ml-4">
                     <input type="text" name="search" class="h-8" placeholder="Search">
                     <button
                         class="mr-6 py-1 px-3 font-semibold bg-green-500 hover:bg-green-600 transition ease-in-out text-white">
                         RECHERCHER</button>
-                </div>
+                </form>
             </div>
             <div class="flex justify-center text-2xl my-3 text-gray-600">
                 <h2>CIRCUIT D'APPROBATION DE REQUETES</h2>

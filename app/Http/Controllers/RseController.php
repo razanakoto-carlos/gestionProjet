@@ -13,6 +13,21 @@ use Illuminate\Support\Facades\Validator;
 class RseController extends Controller
 {
     use AuthorizesRequests;
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'nullable|string|max:255',
+        ]);
+        $searchTerm = $request->input('search', '');
+
+        if (empty($searchTerm)) {
+            return redirect()->route('rse.index');
+        }
+
+        $projects = Project::with('rse')->where('nom_projet', 'like', "%$searchTerm%")->get();
+        return view('Requettes.Rse.index', compact('projects'));
+    }
     /**
      * Display a listing of the resource.
      */

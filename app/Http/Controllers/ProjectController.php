@@ -17,6 +17,22 @@ use Illuminate\Support\Facades\Storage;
 class ProjectController extends Controller
 {
     use AuthorizesRequests;
+
+    public function search(Request $request)
+    {
+        $request->validate([
+            'search' => 'nullable|string|max:255',
+        ]);
+        $searchTerm = $request->input('search', '');
+
+        if (empty($searchTerm)) {
+            return redirect()->route('dashboard');
+        }
+        $projects = Project::where('nom_projet', 'like', "%$searchTerm%")->get();
+
+        return view('dashboard', compact('projects'));
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -46,11 +62,11 @@ class ProjectController extends Controller
         ]);
 
         $filesPath = [];
-        if($request->hasFile('fichier')){
+        if ($request->hasFile('fichier')) {
             foreach ($request->file('fichier') as $file) {
-                $filename = time()."_".$file->getClientOriginalName();
-                $file->storeAs('uploads',$filename, 'public');
-                $filesPath[] = 'uploads/'.$filename ;//Ajouter le chemin du fichier au tableau
+                $filename = time() . "_" . $file->getClientOriginalName();
+                $file->storeAs('uploads', $filename, 'public');
+                $filesPath[] = 'uploads/' . $filename; //Ajouter le chemin du fichier au tableau
             }
         }
 

@@ -11,12 +11,12 @@
                             <i class="bi bi-plus-lg mx-2"></i>NOUVEAU PROJET</a>
                     </div>
                 @endcan
-                <div class="mt-2 ml-4">
+                <form method="get" action="/search" class="mt-2 ml-4">
                     <input type="text" name="search" class="h-8" placeholder="Search">
                     <button
                         class="mr-6 py-1 px-3 font-semibold bg-green-500 hover:bg-green-600 transition ease-in-out text-white">
                         RECHERCHER</button>
-                </div>
+                </form>
             </div>
             <div class="flex justify-center text-2xl my-3 text-gray-600">
                 <h2>CIRCUIT D'APPROBATION DE REQUETES</h2>
@@ -135,7 +135,7 @@
                                 <button
                                     class="text-purple-800 border  border-purple-800 hover:text-white hover:bg-purple-800 transition ease-in-out my-2 px-3 pb-1 rounded">requête</button>
                                 <button
-                                    class="text-red-800 border border-red-800 mb-1 hover:text-white transition ease-in-out hover:bg-red-800  px-3 pb-1 rounded">Paiements</button>
+                                    class="text-red-800 border border-red-800 hover:text-white transition ease-in-out hover:bg-red-800  px-3 pb-1 rounded">Paiements</button>
                             </td>
                         </tr>
                     @endforeach
