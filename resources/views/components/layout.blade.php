@@ -85,14 +85,14 @@
                             @can('isRsenv')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">> Rsp
+                                        href="{{route('rsenv.index')}}">> Rsp
                                         Resp Sauvegarde Env/le et Sociale (RSENV)</a>
                                 </li>
                             @endcan
                             @can('isRpm')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">> Bureau
+                                        href="{{ route('rpm.index')}}">> Bureau
                                         des Marchés (RPM)</a>
                                 </li>
                             @endcan

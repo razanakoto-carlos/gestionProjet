@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RpmController;
 use App\Http\Controllers\RseController;
+use App\Http\Controllers\RsenvController;
 use App\Models\Project;
+use App\Models\Rsenv;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -31,6 +34,12 @@ Route::middleware('auth')->group(function () {
     //Requettes
     Route::resource('rse', RseController::class);
     Route::get('/search_rse', [RseController::class , 'search']);
+
+    Route::resource('rsenv', RsenvController::class);
+    Route::get('/search_rsenv', [RsenvController::class , 'search']);
+
+    Route::resource('rpm', RpmController::class);
+    Route::get('/search_rpm', [RpmController::class , 'search']);
 });
 
 require __DIR__.'/auth.php';
