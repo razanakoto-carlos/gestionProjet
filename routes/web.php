@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\CpController;
+use App\Http\Controllers\DpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\RafController;
+use App\Http\Controllers\RaiController;
 use App\Http\Controllers\RpmController;
 use App\Http\Controllers\RseController;
 use App\Http\Controllers\RsenvController;
+use App\Models\Dp;
 use App\Models\Project;
 use App\Models\Rsenv;
 use App\Models\User;
@@ -40,6 +45,20 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('rpm', RpmController::class);
     Route::get('/search_rpm', [RpmController::class , 'search']);
+
+    Route::resource('raf', RafController::class);
+    Route::get('/search_raf', [RafController::class , 'search']);
+
+    Route::resource('rai', RaiController::class);
+    Route::get('/search_rai', [RaiController::class , 'search']);
+
+    Route::resource('cp', CpController::class);
+    Route::get('/search_cp', [CpController::class , 'search']);
+
+    Route::resource('dp', DpController::class);
+    Route::get('/search_dp', [DpController::class , 'search']);
+
+    //Paiements
 });
 
 require __DIR__.'/auth.php';

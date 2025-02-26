@@ -3,7 +3,7 @@
         <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white 
                 shadow-md  sm:rounded-t ">
             <div class="flex justify-between">
-                <form method="get" action="/search_rpm" class="mt-2 ml-4">
+                <form method="get" action="/search_cp" class="mt-2 ml-4">
                     <input type="text" name="search" class="h-8" placeholder="Search">
                     <button
                         class="mr-6 py-1 px-3 font-semibold bg-green-500 hover:bg-green-600 transition ease-in-out text-white">
@@ -32,7 +32,7 @@
                         </th>
                         <th class="p-4">
                             <p class="text-md leading-none font-semibold">
-                                Validation RPM
+                                Validation CP
                             </p>
                         </th>
                         <th class="p-4">
@@ -82,7 +82,7 @@
                                     </p>
                                 @elseif (
                                     $project->r_rse == 1 &&
-                                        $project->r_rsenv == 1 &&
+                                    $project->r_rsenv == 1 &&
                                         $project->r_bm == 1 &&
                                         $project->r_raf == 1 &&
                                         $project->r_rai == 1 &&
@@ -100,13 +100,14 @@
                                 @endif
                             </td>
                             <td class="p-4">
-                                @if ($project->rpm()->count())
-                                    @if ($project->rpm->allocation_budgetaire == 0 || $project->rpm->prix_unitaire_etc == 0 || $project->rpm->autres == 0)
+                                @if ($project->cp()->count())
+                                    @if (
+                                        $project->cp->avis_favorable == 0)
                                         <p
                                             class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                             en cours
                                         </p>
-                                    @elseif ($project->rpm->allocation_budgetaire == 1)
+                                    @elseif ($project->cp->avis_favorable == 1)
                                         <p
                                             class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
                                             Validé
@@ -125,13 +126,9 @@
                                 @endif
                             </td>
                             <td class="p-4">
-                                @if ($project->rpm()->count())
+                                @if ($project->rai()->count())
                                     <p class="text-sm">
-                                        <x-rating-calculator :ratings="[
-                                            $project->rpm->allocation_budgetaire,
-                                            $project->rpm->prix_unitaire_etc,
-                                            $project->rpm->autres,
-                                        ]" />
+                                        <x-rating-calculator :ratings="[$project->cp->avis_favorable]" />
                                     </p>
                                 @else
                                     <p class="text-sm">
@@ -154,7 +151,7 @@
                             </td>
                             @can('nonDp')
                                 <td class="p-4">
-                                    <a href="{{ route('rpm.edit', $project->rpm->id) }}"
+                                    <a href="{{ route('cp.edit', $project->cp->id) }}"
                                         class="hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 px-3 py-1 font-semibold text-center">VALIDATION</a>
                                 </td>
                             @endcan
@@ -165,4 +162,3 @@
         </div>
     </div>
 </x-card-dashboard>
-

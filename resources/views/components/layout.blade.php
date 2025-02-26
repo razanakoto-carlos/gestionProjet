@@ -99,26 +99,26 @@
                             @can('isRaf')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">> Rsp
+                                        href="{{route('raf.index')}}">> Rsp
                                         Admin et Financier (RAF)</a>
                                 </li>
                             @endcan
                             @can('isRai')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">> Rsp
+                                        href="{{route('rai.index')}}">> Rsp
                                         Audit Interne (RAI)</a>
                                 </li>
                             @endcan
                             @can('isCp')
                                 <li class="border-b-2"> <a
                                         class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">> Charge
+                                        href="{{route('cp.index')}}">> Charge
                                         des Programmes (CP)</a></li>
                             @endcan
                             @can('isDP')
                                 <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">>
+                                        href="{{route('dp.index')}}">>
                                         Coordonnateur de Projet (DP)</a>
                                 </li>
                             @endcan
