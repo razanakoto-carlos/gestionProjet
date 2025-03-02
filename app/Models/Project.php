@@ -36,4 +36,8 @@ class Project extends Model
         return $this->hasOne(Rsenv::class, 'project_id');
     }
 
+    public function Paiement(){
+        return $this->hasOne(Paiement::class, 'project_id');
+    }
+
 }

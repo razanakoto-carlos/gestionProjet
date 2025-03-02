@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\P_ca;
 use Illuminate\Http\Request;
 
-class PCaController extends Controller
+class CaPaiementController extends Controller
 {
     /**
      * Display a listing of the resource.

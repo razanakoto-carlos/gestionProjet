@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\P_rai;
 use Illuminate\Http\Request;
 
-class PRaiController extends Controller
+class RaiPaiementController extends Controller
 {
     /**
      * Display a listing of the resource.

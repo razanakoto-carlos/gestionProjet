@@ -1,14 +1,21 @@
 <?php
 
+use App\Http\Controllers\CaPaiementController;
 use App\Http\Controllers\CpController;
+use App\Http\Controllers\CpPaiementController;
+use App\Http\Controllers\CptPaiementController;
 use App\Http\Controllers\DpController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RafController;
+use App\Http\Controllers\RafPaiementController;
 use App\Http\Controllers\RaiController;
+use App\Http\Controllers\RaiPaiementController;
 use App\Http\Controllers\RpmController;
+use App\Http\Controllers\RpmPaiementController;
 use App\Http\Controllers\RseController;
 use App\Http\Controllers\RsenvController;
+use App\Http\Controllers\RsePaiementController;
 use App\Models\Dp;
 use App\Models\Project;
 use App\Models\Rsenv;
@@ -59,6 +66,27 @@ Route::middleware('auth')->group(function () {
     Route::get('/search_dp', [DpController::class , 'search']);
 
     //Paiements
+    Route::resource('rsePaiement', RsePaiementController::class);
+    Route::get('/search_rse_paiement', [RsePaiementController::class , 'search']);
+
+    Route::resource('cptPaiement', CptPaiementController::class);
+    Route::get('/search_rsenv_paiement', [CptPaiementController::class , 'search']);
+
+    Route::resource('rpmPaiement', RpmPaiementController::class);
+    Route::get('/search_rpm_paiement', [RpmPaiementController::class , 'search']);
+
+    Route::resource('rafPaiement', RafPaiementController::class);
+    Route::get('/search_raf_paiement', [RafPaiementController::class , 'search']);
+
+    Route::resource('raiPaiement', RaiPaiementController::class);
+    Route::get('/search_rai_paiement', [RaiPaiementController::class , 'search']);
+
+    Route::resource('cpPaiement', CpPaiementController::class);
+    Route::get('/search_cp_paiement', [CpPaiementController::class , 'search']);
+
+    Route::resource('caPaiement', CaPaiementController::class);
+    Route::get('/search_dp_paiement', [CaPaiementController::class , 'search']);
+
 });
 
 require __DIR__.'/auth.php';

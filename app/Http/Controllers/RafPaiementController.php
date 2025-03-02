@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\P_raf;
 use Illuminate\Http\Request;
 
-class PRafController extends Controller
+class RafPaiementController extends Controller
 {
     /**
      * Display a listing of the resource.

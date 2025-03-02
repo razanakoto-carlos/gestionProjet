@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Cp;
 use App\Models\Dp;
+use App\Models\Paiement;
 use App\Models\Project;
 use App\Models\Raf;
 use App\Models\Rai;
@@ -129,7 +130,13 @@ class ProjectController extends Controller
             'observations' => "",
         ]);
 
-
+        //Creation de paiement
+        Paiement::create([
+            'project_id' => $project->id,
+            'updated_at' => date('Y-m-d\TH:i'),
+            'created_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+        ]);
         return redirect()->route('dashboard');
     }
 

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\P_rpm;
 use Illuminate\Http\Request;
 
-class PRpmController extends Controller
+class RpmPaiementController extends Controller
 {
     /**
      * Display a listing of the resource.

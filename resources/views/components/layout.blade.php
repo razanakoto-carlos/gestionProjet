@@ -142,7 +142,7 @@
                             @can('isRse')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">>
+                                        href="{{route('rsePaiement.index')}}">>
                                         Rsp planification Suivi-
                                         <br>Evaluation (RSE)</a>
                                 </li>
@@ -150,39 +150,39 @@
                             @can('isRpm')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">> Bureau
+                                        href="{{route('rpmPaiement.index')}}">> Bureau
                                         des Marchés (RPM)</a>
                                 </li>
                             @endcan
                             @can('isCpt')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">> Comptabilite (CPT)</a>
+                                        href="{{route('cptPaiement.index')}}">> Comptabilite (CPT)</a>
                                 </li>
                             @endcan
                             @can('isRaf')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">> Rsp
+                                        href="{{route('rafPaiement.index')}}">> Rsp
                                         Admin et Financier (RAF)</a>
                                 </li>
                             @endcan
                             @can('isRai')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">> Rsp
+                                        href="{{route('raiPaiement.index')}}">> Rsp
                                         Audit Interne (RAI)</a>
                                 </li>
                             @endcan
                             @can('isCp')
                                 <li class="border-b-2"> <a
                                         class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">> Charge
+                                        href="{{route('cpPaiement.index')}}">> Charge
                                         des Programmes (CP)</a></li>
                             @endcan
-                            @can('isCp')
+                            @can('isDP')
                                 <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="#">>
+                                        href="{{route('caPaiement.index')}}">>
                                         Coordonnateur de Projet (CA)</a>
                                 </li>
                             @endcan

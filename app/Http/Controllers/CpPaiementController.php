@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\P_cp;
 use Illuminate\Http\Request;
 
-class PCpController extends Controller
+class CpPaiementController extends Controller
 {
     /**
      * Display a listing of the resource.
