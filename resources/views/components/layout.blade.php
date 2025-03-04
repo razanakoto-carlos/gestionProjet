@@ -59,7 +59,7 @@
 
         <!-- Sidebar (Starts Below Navbar) -->
         <aside
-            class="bg-white shadow-lg sm:rounded-lg text-gray-500 w-[14rem] flex flex-col px-2 py-4 absolute md:relative md:translate-x-0">
+            class="bg-white shadow-lg sm:rounded-lg text-gray-500 w-[14.9rem] flex flex-col px-2 py-4 absolute md:relative md:translate-x-0">
             <!-- Sidebar Navigation -->
             <x-dropdown-menu>
                 <x-slot name='trigger'>

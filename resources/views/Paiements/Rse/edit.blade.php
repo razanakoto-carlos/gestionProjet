@@ -10,7 +10,7 @@
                                 {{ __('validation rse') }}
                             </h2>
                         </header>
-                        <form method="POST" action="{{route('rse.update', $rse->id)}}" class="mt-6 space-y-6">
+                        <form method="POST" action="{{route('rsePaiement.update', $rse->id)}}" class="mt-6 space-y-6">
                             @csrf
                             @method('put')
 
@@ -25,60 +25,46 @@
                             </div>
                             <div>
                                 <div class="flex flex-row text-center items-center">
-                                    <x-input-label class="mr-[3.3rem] text-lg text-gray-500 font-semibold text-nowrap"
-                                        for="code_analytique" :value="__('Code Analytique')" />
-                                    <select name="code_analytique" id="code_analytique"
+                                    <x-input-label class="mr-[5rem] text-nowrap text-lg text-gray-500 font-semibold"
+                                        for="benef_com" :value="__('Benefs/Com')" />
+                                    <x-text-input id="benef_com" min="0" name="benef_com"
+                                        type="number" class="block w-full h-8" :value="old('benef_com', $rse->benef_com)" />
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('benef_com')" />
+                            </div>
+                            <div>
+                                <div class="flex flex-row text-center items-center">
+                                    <x-input-label class="mr-[3.6rem] text-nowrap text-lg text-gray-500 font-semibold"
+                                        for="ref_activite_pta" :value="__('Réf Activite PTA')" />
+                                    <x-text-input id="ref_activite_pta" min="0" name="ref_activite_pta"
+                                        type="number" class="block w-full h-8" :value="old('ref_activite_pta', $rse->ref_activite_pta)" />
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('ref_activite_pta')" />
+                            </div>
+                            <div>
+                                <div class="flex flex-row text-center items-center">
+                                    <x-input-label class="mr-[1.7rem] text-left text-wrap text-lg text-gray-500 font-semibold"
+                                        for="conformite_aux_activite" :value="__('Conformité Aux Activités')" />
+                                    <select name="conformite_aux_activite" id="conformite_aux_activite"
                                         class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
-                                        <option value="0" {{ $rse->code_analytique === 0 ? 'selected' : '' }}>
+                                        <option value="0" {{ $rse->conformite_aux_activite === 0 ? 'selected' : '' }}>
                                         </option>
-                                        <option value="1" {{ $rse->code_analytique === 1 ? 'selected' : '' }}>OUI
+                                        <option value="1" {{ $rse->conformite_aux_activite === 1 ? 'selected' : '' }}>OUI
                                         </option>
-                                        <option value="2" {{ $rse->code_analytique === 2 ? 'selected' : '' }}>NON
+                                        <option value="2" {{ $rse->conformite_aux_activite === 2 ? 'selected' : '' }}>NON
                                         </option>
                                     </select>
                                 </div>
-                                <x-input-error class="mt-2" :messages="$errors->get('code_analytique')" />
+                                <x-input-error class="mt-2" :messages="$errors->get('conformite_aux_activite')" />
                             </div>
                             <div>
                                 <div class="flex flex-row text-center items-center">
                                     <x-input-label class="mr-[4.1rem] text-nowrap text-lg text-gray-500 font-semibold"
-                                        for="montant_ptba" :value="__('Montant PTBA')" />
-                                    <x-text-input id="montant_ptba" min="0" step="any" name="montant_ptba"
-                                        type="number" class="block w-full h-8" :value="old('montant_ptba', $rse->montant_ptba)" />
+                                        for="montant_prevu" :value="__('Montant Prévu')" />
+                                    <x-text-input id="montant_prevu" min="0" name="montant_prevu"
+                                        type="number" class="block w-full h-8" :value="old('montant_prevu', $rse->montant_prevu)" />
                                 </div>
-                                <x-input-error class="mt-2" :messages="$errors->get('montant_ptba')" />
-                            </div>
-                            <div>
-                                <div class="flex flex-row text-center items-center">
-                                    <x-input-label class="mr-[1.2rem] text-left text-wrap text-lg text-gray-500 font-semibold"
-                                        for="conformite_requete" :value="__('Conformité De La Requête')" />
-                                    <select name="conformite_requete" id="conformite_requete"
-                                        class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
-                                        <option value="0" {{ $rse->conformite_requete === 0 ? 'selected' : '' }}>
-                                        </option>
-                                        <option value="1" {{ $rse->conformite_requete === 1 ? 'selected' : '' }}>OUI
-                                        </option>
-                                        <option value="2" {{ $rse->conformite_requete === 2 ? 'selected' : '' }}>NON
-                                        </option>
-                                    </select>
-                                </div>
-                                <x-input-error class="mt-2" :messages="$errors->get('conformite_requete')" />
-                            </div>
-                            <div>
-                                <div class="flex flex-row text-center items-center">
-                                    <x-input-label class="mr-[3rem] max-w-28 text-left text-wrap text-lg text-gray-500 font-semibold"
-                                        for="conformite_tdr_ptba" :value="__('Conformité Du TDR Ou PTBA')" />
-                                    <select name="conformite_tdr_ptba" id="conformite_tdr_ptba"
-                                        class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
-                                        <option value="0" {{ $rse->conformite_tdr_ptba === 0 ? 'selected' : '' }}>
-                                        </option>
-                                        <option value="1" {{ $rse->conformite_tdr_ptba === 1 ? 'selected' : '' }}>OUI
-                                        </option>
-                                        <option value="2" {{ $rse->conformite_tdr_ptba === 2 ? 'selected' : '' }}>NON
-                                        </option>
-                                    </select>
-                                </div>
-                                <x-input-error class="mt-2" :messages="$errors->get('conformite_tdr_ptba')" />
+                                <x-input-error class="mt-2" :messages="$errors->get('montant_prevu')" />
                             </div>
                             <div>
                                 <div class="flex flex-row">

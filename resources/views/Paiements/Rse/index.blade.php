@@ -82,7 +82,7 @@
                                         $paiement->project->r_cp == 0 ||
                                         $paiement->project->r_dp == 0)
                                     <p
-                                        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                        class="text-xs border transition ease-in-out duration-300 shadow   p-2 uppercase font-semibold text-center cursor-pointer">
                                         en cours
                                     </p>
                                 @elseif (
@@ -94,12 +94,12 @@
                                         $paiement->project->r_cp == 1 &&
                                         $paiement->project->r_dp == 1)
                                     <p
-                                        class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        class="text-xs text-white bg-green-600 border-green-700 transition ease-in-out duration-300 shadow p-2 uppercase font-semibold text-center cursor-pointer">
                                         Validé
                                     </p>
                                 @else
                                     <p
-                                        class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        class="text-xs text-white bg-yellow-600 border-yellow-700 transition ease-in-out duration-300 shadow p-2 uppercase font-semibold text-center cursor-pointer">
                                         Non Validé
                                     </p>
                                 @endif
@@ -109,23 +109,23 @@
                                     @if (
                                         $paiement->rse->conformite_aux_activite == 0 )
                                         <p
-                                            class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                            class="text-xs  border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                             en cours
                                         </p>
                                     @elseif ($paiement->rse->conformite_aux_activite == 1)
                                         <p
-                                            class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                            class="text-xs text-white bg-green-600 transition ease-in-out duration-300 shadow p-2 uppercase font-semibold text-center cursor-pointer">
                                             Validé
                                         </p>
                                     @else
                                         <p
-                                            class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                            class="text-xs text-white bg-yellow-600  border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
                                             Non Validé
                                         </p>
                                     @endif
                                 @else
                                     <p
-                                        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                        class="text-xs border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                         Non commencé
                                     </p>
                                 @endif

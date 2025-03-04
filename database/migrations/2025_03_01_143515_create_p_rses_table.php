@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('ref_activite_pta')->default(0);
             $table->integer('conformite_aux_activite')->default(0);
             $table->integer('montant_prevu')->default(0);//pour le montant
-            $table->integer('observations')->default(0);
+            $table->text('observations')->default(0);
             $table->unsignedBigInteger('paiement_id')->unique();
             $table->foreign('paiement_id')->references('id')->on('paiements')->onDelete('cascade');
             $table->timestamps();

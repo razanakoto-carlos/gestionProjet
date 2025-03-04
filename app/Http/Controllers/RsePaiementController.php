@@ -102,22 +102,22 @@ class RsePaiementController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         $rse = P_rse::findorFail($id);
-        $project = $rse->project;
+        $paiement = $rse->paiement;
 
-        if ($request->input('code_analytique') == 1 && $request->input('conformite_requete') && $request->input('conformite_tdr_ptba')) {
-            $project->r_rse = 1;
-            $project->save();
+        if ($request->input('conformite_aux_activite') == 1 ) {
+            $paiement->p_rse = 1;
+            $paiement->save();
         }
 
         $rse->date = $request->input('date');
-        $rse->code_analytique = $request->input('code_analytique');
-        $rse->conformite_requete = $request->input('conformite_requete');
-        $rse->conformite_tdr_ptba = $request->input('conformite_tdr_ptba');
-        $rse->montant_ptba = $request->input('montant_ptba');
+        $rse->benef_com = $request->input('benef_com');
+        $rse->ref_activite_pta = $request->input('ref_activite_pta');
+        $rse->conformite_aux_activite = $request->input('conformite_aux_activite');
+        $rse->montant_prevu = $request->input('montant_prevu');
         $rse->observations = $request->input('observations');
         $rse->save();
 
-        return redirect()->route('rse.index')->with('message', 'Validation enregistrées !!!');
+        return redirect()->route('rsePaiement.index')->with('message', 'Validation enregistrées !!!');
     }
 
     /**
