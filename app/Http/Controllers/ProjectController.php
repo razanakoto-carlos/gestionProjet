@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Cp;
 use App\Models\Dp;
+use App\Models\P_ca;
+use App\Models\P_cp;
+use App\Models\P_cpt;
+use App\Models\P_raf;
+use App\Models\P_rai;
+use App\Models\P_rpm;
+use App\Models\P_rse;
 use App\Models\Paiement;
 use App\Models\Project;
 use App\Models\Raf;
@@ -131,12 +138,64 @@ class ProjectController extends Controller
         ]);
 
         //Creation de paiement
-        Paiement::create([
+        $paiement = Paiement::create([
             'project_id' => $project->id,
             'updated_at' => date('Y-m-d\TH:i'),
             'created_at' => date('Y-m-d\TH:i'),
             'date' => date('Y-m-d\TH:i'),
         ]);
+
+        P_rse::create([
+            'paiement_id' => $paiement->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+
+        P_cpt::create([
+            'paiement_id' => $paiement->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+        P_rpm::create([
+            'paiement_id' => $paiement->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+        P_raf::create([
+            'paiement_id' => $paiement->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+        P_rai::create([
+            'paiement_id' => $paiement->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+        P_cp::create([
+            'paiement_id' => $paiement->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+        P_ca::create([
+            'paiement_id' => $paiement->id,
+            'created_at' => date('Y-m-d\TH:i'),
+            'updated_at' => date('Y-m-d\TH:i'),
+            'date' => date('Y-m-d\TH:i'),
+            'observations' => "",
+        ]);
+
         return redirect()->route('dashboard');
     }
 

@@ -154,7 +154,7 @@
                             </td>
                             @can('nonDp')
                                 <td class="p-4">
-                                    <a href="{{ route('rse.edit', $paiement->rse->id) }}"
+                                    <a href="{{ route('rsePaiement.edit', $paiement->rse->id) }}"
                                         class="hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 px-3 py-1 font-semibold text-center">VALIDATION</a>
                                 </td>
                             @endcan
