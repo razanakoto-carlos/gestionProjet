@@ -128,26 +128,80 @@
                             @endif
 
                             <td class="p-4">
-                                <p class="text-sm">
-                                    <x-rating-calculator :ratings="[
-                                        $project->r_rse,
-                                        $project->r_bm,
-                                        $project->r_raf,
-                                        $project->r_rai,
-                                        $project->r_cp,
-                                        $project->r_dp,
-                                    ]" />
-                                </p>
+                                @if ($project->count())
+                                    <p class="text-sm">
+                                        <x-rating-calculator :ratings="[
+                                            $project->r_rse,
+                                            $project->r_bm,
+                                            $project->r_raf,
+                                            $project->r_rai,
+                                            $project->r_cp,
+                                            $project->r_dp,
+                                        ]" />
+                                    </p>
+                                @else
+                                    <p class="text-sm">
+                                        00.00%
+                                    </p>
+                                @endif
                             </td>
-                            <td class="p-4">
-                                <p
-                                    class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
-                                    en cours
-                                </p>
-                            </td>
+                            @if (
+                                $project->paiement &&
+                                    ($project->paiement->p_rpm === 0 ||
+                                        $project->paiement->p_rse === 0 ||
+                                        $project->paiement->p_cpt === 0 ||
+                                        $project->paiement->p_raf === 0 ||
+                                        $project->paiement->p_rai === 0 ||
+                                        $project->paiement->p_cp === 0 ||
+                                        $project->paiement->p_ca === 0))
+                                <td class="p-4">
+                                    <p
+                                        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        en cours
+                                    </p>
+                                </td>
+                            @elseif (
+                                $project->paiement &&
+                                    ($project->paiement->p_rpm === 1 &&
+                                        $project->paiement->p_rse === 1 &&
+                                        $project->paiement->p_cpt === 1 &&
+                                        $project->paiement->p_raf === 1 &&
+                                        $project->paiement->p_rai === 1 &&
+                                        $project->paiement->p_cp === 1 &&
+                                        $project->paiement->p_ca === 1))
+                                <td class="p-4">
+                                    <p
+                                        class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        Validé
+                                    </p>
+                                </td>
+                            @else
+                                <td class="p-4">
+                                    <p
+                                        class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        Non Validé
+                                    </p>
+                                </td>
+                            @endif
                             <td class="p-4">
                                 <p href="#" class="text-sm">
-                                    00.00%
+                                    @if ($project->paiement()->count())
+                                        <p class="text-sm">
+                                            <x-rating-calculator :ratings="[
+                                                $project->paiement->p_rpm,
+                                                $project->paiement->p_rse,
+                                                $project->paiement->p_cpt,
+                                                $project->paiement->p_raf,
+                                                $project->paiement->p_rai,
+                                                $project->paiement->p_cp,
+                                                $project->paiement->p_ca,
+                                            ]" />
+                                        </p>
+                                    @else
+                                        <p class="text-sm">
+                                            00.00%
+                                        </p>
+                                    @endif
                                 </p>
                             </td>
                             <td class="p-4">

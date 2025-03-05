@@ -3,7 +3,7 @@
         <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white 
                 shadow-md  sm:rounded-t ">
             <div class="flex justify-between">
-                <form method="get" action="/search_rai" class="mt-2 ml-4">
+                <form method="get" action="/search_rai_paiement" class="mt-2 ml-4">
                     <input type="text" name="search" class="h-8" placeholder="Search">
                     <button
                         class="mr-6 py-1 px-3 font-semibold bg-green-500 hover:bg-green-600 transition ease-in-out text-white">
@@ -11,7 +11,7 @@
                 </form>
             </div>
             <div class="flex justify-center text-2xl my-3 text-gray-600">
-                <h2>CIRCUIT D'APPROBATION DE REQUETES</h2>
+                <h2>APPROBATION DE REQUETES</h2>
             </div>
         </div>
         <div
@@ -27,22 +27,22 @@
                         </th>
                         <th class="p-4">
                             <p class="text-md leading-none font-semibold">
-                                Statut general
-                            </p>
-                        </th>
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Validation RAI
-                            </p>
-                        </th>
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Statut
-                            </p>
-                        </th>
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
                                 Date
+                            </p>
+                        </th>
+                        <th class="p-4">
+                            <p class="text-md leading-none font-semibold">
+                                Requête
+                            </p>
+                        </th>
+                        <th class="p-4">
+                            <p class="text-md leading-none font-semibold">
+                                Validation Paiement
+                            </p>
+                        </th>
+                        <th class="p-4">
+                            <p class="text-md leading-none font-semibold">
+                                Statut Paiement
                             </p>
                         </th>
                         <th class="p-4">
@@ -60,75 +60,89 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($projects as $project)
+                    @foreach ($paiements as $paiement)
                         <tr class="border-b">
                             <td class="py-2 pl-4 max-w-7">
                                 <p class="text-sm font-semibold text-gray-600">
-                                    {{ $project->nom_projet }}
+                                    {{ $paiement->project->nom_projet }}
+                                </p>
+                            </td>
+                            <td class="p-4">
+                                <p class="text-sm">
+                                    {{ $paiement->project->date }}
                                 </p>
                             </td>
                             <td class="p-4">
                                 @if (
-                                    $project->r_rsenv == 0 ||
-                                        $project->r_rse == 0 ||
-                                        $project->r_bm == 0 ||
-                                        $project->r_raf == 0 ||
-                                        $project->r_rai == 0 ||
-                                        $project->r_cp == 0 ||
-                                        $project->r_dp == 0)
+                                    $paiement->project->r_rse == 0 ||
+                                        $paiement->project->r_rsenv == 0 ||
+                                        $paiement->project->r_bm == 0 ||
+                                        $paiement->project->r_raf == 0 ||
+                                        $paiement->project->r_rai == 0 ||
+                                        $paiement->project->r_cp == 0 ||
+                                        $paiement->project->r_dp == 0)
                                     <p
-                                        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                        class="text-xs border transition ease-in-out duration-300 shadow   p-2 uppercase font-semibold text-center cursor-pointer">
                                         en cours
                                     </p>
                                 @elseif (
-                                    $project->r_rse == 1 &&
-                                    $project->r_rsenv == 1 &&
-                                        $project->r_bm == 1 &&
-                                        $project->r_raf == 1 &&
-                                        $project->r_rai == 1 &&
-                                        $project->r_cp == 1 &&
-                                        $project->r_dp == 1)
+                                    $paiement->project->r_rse == 1 &&
+                                        $paiement->project->r_rsenv == 1 &&
+                                        $paiement->project->r_bm == 1 &&
+                                        $paiement->project->r_raf == 1 &&
+                                        $paiement->project->r_rai == 1 &&
+                                        $paiement->project->r_cp == 1 &&
+                                        $paiement->project->r_dp == 1)
                                     <p
-                                        class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        class="text-xs text-white bg-green-600 border-green-700 transition ease-in-out duration-300 shadow p-2 uppercase font-semibold text-center cursor-pointer">
                                         Validé
                                     </p>
                                 @else
                                     <p
-                                        class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                        class="text-xs text-white bg-yellow-600 border-yellow-700 transition ease-in-out duration-300 shadow p-2 uppercase font-semibold text-center cursor-pointer">
                                         Non Validé
                                     </p>
                                 @endif
                             </td>
                             <td class="p-4">
-                                @if ($project->rai()->count())
+                                @if ($paiement->rai()->count())
                                     @if (
-                                        $project->rai->conforme_aux_procedures == 0)
+                                        $paiement->rai->conformite_rapport == 0 ||
+                                            $paiement->rai->egalite_facture == 0 ||
+                                            $paiement->rai->controle_verification == 0)
                                         <p
-                                            class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                            class="text-xs  border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                             en cours
                                         </p>
-                                    @elseif ($project->rai->conforme_aux_procedures == 1)
+                                    @elseif (
+                                        $paiement->rai->conformite_rapport == 1 &&
+                                            $paiement->rai->egalite_facture == 1 &&
+                                            $paiement->rai->controle_verification == 1)
                                         <p
-                                            class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                            class="text-xs text-white bg-green-600 transition ease-in-out duration-300 shadow p-2 uppercase font-semibold text-center cursor-pointer">
                                             Validé
                                         </p>
                                     @else
                                         <p
-                                            class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                            class="text-xs text-white bg-yellow-600  border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
                                             Non Validé
                                         </p>
                                     @endif
                                 @else
                                     <p
-                                        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
+                                        class="text-xs border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                         Non commencé
                                     </p>
                                 @endif
                             </td>
                             <td class="p-4">
-                                @if ($project->rai()->count())
+                                @if ($paiement->rse()->count())
                                     <p class="text-sm">
-                                        <x-rating-calculator :ratings="[$project->rai->conforme_aux_procedures]" />
+                                        <x-rating-calculator :ratings="[
+                                            $paiement->rai->conformite_rapport,
+                                            $paiement->rai->egalite_facture,
+                                            $paiement->rai->controle_verification,
+                                        ]" />
                                     </p>
                                 @else
                                     <p class="text-sm">
@@ -136,14 +150,10 @@
                                     </p>
                                 @endif
                             </td>
-                            <td class="p-4">
-                                <p class="text-sm">
-                                    {{ $project->date }}
-                                </p>
-                            </td>
+
                             <td>
                                 <p href="#" class="text-sm font-normal ">
-                                    @foreach (json_decode($project->fichier) as $file)
+                                    @foreach (json_decode($paiement->project->fichier) as $file)
                                         <a href="{{ asset('storage/' . $file) }}" target="_blank"
                                             class="text-gray-600 hover:underline hover:text-gray-800">{{ basename($file) }}</a><br>
                                     @endforeach
@@ -151,7 +161,7 @@
                             </td>
                             @can('nonDp')
                                 <td class="p-4">
-                                    <a href="{{ route('rai.edit', $project->rai->id) }}"
+                                    <a href="{{ route('raiPaiement.edit', $paiement->rai->id) }}"
                                         class="hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 px-3 py-1 font-semibold text-center">VALIDATION</a>
                                 </td>
                             @endcan

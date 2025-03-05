@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('p_cps', function (Blueprint $table) {
             $table->id();
             $table->date('date')->useCurrent();
-            $table->integer('bon_a_payer')->default(0);
+            $table->integer('conformite_procedure')->default(0);
             $table->text('observations');
             $table->unsignedBigInteger('paiement_id')->unique();
             $table->foreign('paiement_id')->references('id')->on('paiements')->onDelete('cascade');

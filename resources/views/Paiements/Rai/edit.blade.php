@@ -10,7 +10,7 @@
                                 {{ __('validation rai') }}
                             </h2>
                         </header>
-                        <form method="POST" action="{{ route('rai.update', $rai->id) }}" class="mt-6 space-y-6">
+                        <form method="POST" action="{{route('raiPaiement.update', $rai->id)}}" class="mt-6 space-y-6">
                             @csrf
                             @method('put')
 
@@ -25,26 +25,57 @@
                             </div>
                             <div>
                                 <div class="flex flex-row text-center items-center">
-                                    <label
-                                        class="block text-sm mr-[3rem] max-w-28 text-left text-wrap text-gray-700 font-semibold"
-                                        for="validation">Requete Conforme Aux Procedures</label>
-                                    <select name="conforme_aux_procedures" id="conforme_aux_procedures"
+                                    <x-input-label class="mr-[2.9rem] max-w-28 text-left text-wrap text-lg text-gray-500 font-semibold"
+                                        for="conformite_rapport" :value="__('Conformité Par Rapport Aux Procédures')" />
+                                    <select name="conformite_rapport" id="conformite_rapport"
                                         class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
-                                        <option value="0" {{ $rai->conforme_aux_procedures === 0 ? 'selected' : '' }}>
+                                        <option value="0" {{ $rai->conformite_rapport === 0 ? 'selected' : '' }}>
                                         </option>
-                                        <option value="1" {{ $rai->conforme_aux_procedures === 1 ? 'selected' : '' }}>OUI
+                                        <option value="1" {{ $rai->conformite_rapport === 1 ? 'selected' : '' }}>OUI
                                         </option>
-                                        <option value="2" {{ $rai->conforme_aux_procedures === 2 ? 'selected' : '' }}>NON
+                                        <option value="2" {{ $rai->conformite_rapport === 2 ? 'selected' : '' }}>NON
                                         </option>
                                     </select>
                                 </div>
-                                <x-input-error class="mt-2" :messages="$errors->get('conforme_aux_procedures')" />
+                                <x-input-error class="mt-2" :messages="$errors->get('conformite_rapport')" />
+                            </div>
+                            <div>
+                                <div class="flex flex-row text-center items-center">
+                                    <x-input-label class="mr-[2.4rem]  text-left  text-lg text-gray-500 font-semibold"
+                                        for="egalite_facture" :value="__('Eligibilité De La Facture')" />
+                                    <select name="egalite_facture" id="egalite_facture"
+                                        class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
+                                        <option value="0" {{ $rai->egalite_facture === 0 ? 'selected' : '' }}>
+                                        </option>
+                                        <option value="1" {{ $rai->egalite_facture === 1 ? 'selected' : '' }}>OUI
+                                        </option>
+                                        <option value="2" {{ $rai->egalite_facture === 2 ? 'selected' : '' }}>NON
+                                        </option>
+                                    </select>
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('egalite_facture')" />
+                            </div>
+                            <div>
+                                <div class="flex flex-row text-center items-center">
+                                    <x-input-label class="mr-[0.4rem] text-left text-wrap text-lg text-gray-500 font-semibold"
+                                        for="controle_verification" :value="__('Autre Contrôle Et Verification')" />
+                                    <select name="controle_verification" id="controle_verification"
+                                        class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
+                                        <option value="0" {{ $rai->controle_verification === 0 ? 'selected' : '' }}>
+                                        </option>
+                                        <option value="1" {{ $rai->controle_verification === 1 ? 'selected' : '' }}>OUI
+                                        </option>
+                                        <option value="2" {{ $rai->controle_verification === 2 ? 'selected' : '' }}>NON
+                                        </option>
+                                    </select>
+                                </div>
+                                <x-input-error class="mt-2" :messages="$errors->get('controle_verification')" />
                             </div>
                             <div>
                                 <div class="flex flex-row">
-                                    <x-input-label class="mr-[4.8rem] text-lg text-gray-500 font-semibold"
-                                        for="observations" :value="__('Observations')" />
-                                    <textarea class="border border-gray-300 border-solid w-full" name="observations" id="observations" rows="5">{{ old('observations', $rai->observations) }}</textarea>
+                                    <x-input-label class="mr-[4.8rem] text-lg text-gray-500 font-semibold" for="observations"
+                                        :value="__('Observations')" />
+                                    <textarea class="border border-gray-300 border-solid w-full" name="observations" id="observations" rows="5">{{old('observations', $rai->observations)}}</textarea>
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('observations')" />
                             </div>

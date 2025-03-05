@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class P_cp extends Model
 {
-    protected $fillable = ['observations', 'created_at', 'updated_at', 'paiement_id','date','bon_a_payer'];
+    protected $fillable = ['observations', 'created_at', 'updated_at', 'paiement_id','date','conformite_procedure'];
 
     public function paiement(){
      return $this->belongsTo(Paiement::class);

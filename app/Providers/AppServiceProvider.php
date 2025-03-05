@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Paiement;
 use App\Models\Project;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -63,14 +64,31 @@ class AppServiceProvider extends ServiceProvider
             return $user->role->name === 'DP';
         });
 
-        Gate::define('nonDp', function($user){
+        Gate::define('nonDp', function ($user) {
             return $user->role->name != 'DP';
         });
 
         //View in dashboard
-        view::composer('components.card-dashboard', function ($view) {
-            $view->with('projectCount',Project::count());
+        $requetteValide = Project::where('r_rse', 1)
+            ->where('r_bm', 1)
+            ->where('r_raf', 1)
+            ->where('r_rai', 1)
+            ->where('r_cp', 1)
+            ->where('r_dp', 1)
+            ->get();
+        $paiementValide = Paiement::where('p_rpm', 1)
+            ->where('p_rse', 1)
+            ->where('p_cpt', 1)
+            ->where('p_raf', 1)
+            ->where('p_rai', 1)
+            ->where('p_cp', 1)
+            ->where('p_ca', 1)
+            ->get();
+        view::composer('components.card-dashboard', function ($view) use ($paiementValide, $requetteValide){
+            $view->with('projectCount', Project::count());
             $view->with('userCount', User::count());
+            $view->with('paiementValide', $paiementValide->count());
+            $view->with('requetteValide', $requetteValide->count());
         });
     }
 }

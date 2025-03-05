@@ -24,11 +24,15 @@ class RsePaiementController extends Controller
         $searchTerm = $request->input('search', '');
 
         if (empty($searchTerm)) {
-            return redirect()->route('rse.index');
+            return redirect()->route('rsePaiement.index');
         }
 
-        $projects = Project::with('rse')->where('nom_projet', 'like', "%$searchTerm%")->get();
-        return view('Paiements.Rse.index', compact('projects'));
+        $paiements = Paiement::whereHas('project', function ($query) use ($request) {
+            $query->where('nom_projet', 'like', "%{$request->search}%");
+        })->with('project') // Charger la relation 'project' pour accéder aux données du projet si nécessaire
+            ->get();
+
+        return view('Paiements.Rse.index', compact('paiements'));
     }
     /**
      * Display a listing of the resource.

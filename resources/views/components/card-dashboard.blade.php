@@ -23,7 +23,7 @@
                 <div class="p-3">
                     <h3 class="mb-1 text-lg text-gray-700">Requêtes validé</h3>
                     <div class="flex justify-between font-bold text-3xl text-gray-500">
-                        <p class="ml-2 mt-2">3</p>
+                        <p class="ml-2 mt-2">{{$requetteValide}}</p>
                         <i class="bi bi-list-check text-5xl text-[#438f3d]"></i>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                 <div class="p-3">
                     <h3 class="mb-1 text-lg text-gray-700">Paiements validé</h3>
                     <div class="flex justify-between font-bold text-3xl text-gray-500">
-                        <p class="ml-2 mt-2">2</p>
+                        <p class="ml-2 mt-2">{{$paiementValide}}</p>
                         <i class="bi bi-cash-coin text-5xl text-orange-400"></i>
                     </div>
                 </div>

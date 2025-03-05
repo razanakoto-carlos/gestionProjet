@@ -7,10 +7,10 @@
                     <section>
                         <header>
                             <h2 class="-ml-6 -pt-4 text-lg uppercase font-semibold text-gray-700">
-                                {{ __('validation dp') }}
+                                {{ __('validation ca') }}
                             </h2>
                         </header>
-                        <form method="POST" action="{{ route('dp.update', $dp->id) }}" class="mt-6 space-y-6">
+                        <form method="POST" action="{{route('caPaiement.update', $ca->id)}}" class="mt-6 space-y-6">
                             @csrf
                             @method('put')
 
@@ -19,32 +19,31 @@
                                     <x-input-label class="mr-32 text-lg text-gray-500 font-semibold" for="date"
                                         :value="__('Date')" />
                                     <x-text-input id="date" name="date" type="date" class="block w-full h-8"
-                                        :value="old('date', $dp->date)" required />
+                                        :value="old('date', $ca->date)" required />
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('date')" />
                             </div>
                             <div>
                                 <div class="flex flex-row text-center items-center">
-                                    <label
-                                        class="block text-sm mr-[4.9rem] max-w-28 text-left text-wrap text-gray-700 font-semibold"
-                                        for="validation">Approbation</label>
-                                    <select name="approbation" id="approbation"
+                                    <x-input-label class="mr-[2.9rem] max-w-28 text-left text-wrap text-lg text-gray-500 font-semibold"
+                                        for="conformite_procedure" :value="__('Conformité Par rapport Aux Procédures')" />
+                                    <select name="conformite_procedure" id="conformite_procedure"
                                         class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
-                                        <option value="0" {{ $dp->approbation === 0 ? 'selected' : '' }}>
+                                        <option value="0" {{ $ca->conformite_procedure === 0 ? 'selected' : '' }}>
                                         </option>
-                                        <option value="1" {{ $dp->approbation === 1 ? 'selected' : '' }}>OUI
+                                        <option value="1" {{ $ca->conformite_procedure === 1 ? 'selected' : '' }}>OUI
                                         </option>
-                                        <option value="2" {{ $dp->approbation === 2 ? 'selected' : '' }}>NON
+                                        <option value="2" {{ $ca->conformite_procedure === 2 ? 'selected' : '' }}>NON
                                         </option>
                                     </select>
                                 </div>
-                                <x-input-error class="mt-2" :messages="$errors->get('approbation')" />
+                                <x-input-error class="mt-2" :messages="$errors->get('conformite_procedure')" />
                             </div>
                             <div>
                                 <div class="flex flex-row">
-                                    <x-input-label class="mr-[4.8rem] text-lg text-gray-500 font-semibold"
-                                        for="observations" :value="__('Observations')" />
-                                    <textarea class="border border-gray-300 border-solid w-full" name="observations" id="observations" rows="5">{{ old('observations', $dp->observations) }}</textarea>
+                                    <x-input-label class="mr-[4.8rem] text-lg text-gray-500 font-semibold" for="observations"
+                                        :value="__('Observations')" />
+                                    <textarea class="border border-gray-300 border-solid w-full" name="observations" id="observations" rows="5">{{old('observations', $ca->observations)}}</textarea>
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('observations')" />
                             </div>
@@ -52,7 +51,7 @@
                                 <button type="submit"
                                     class="inline-flex items-center px-4 py-1 bg-blue-600 border font-semibold text-white uppercase 
                                 hover:bg-blue-700 focus:bg-blue-700transition ease-in-out duration-150">Validation</button>
-                                @if (session('status') === 'dp-updated')
+                                @if (session('status') === 'ca-updated')
                                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
                                         class="text-sm text-gray-600">{{ __('Validation.') }}</p>
                                 @endif

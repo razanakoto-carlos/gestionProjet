@@ -10,7 +10,7 @@
                                 {{ __('validation cp') }}
                             </h2>
                         </header>
-                        <form method="POST" action="{{ route('cp.update', $cp->id) }}" class="mt-6 space-y-6">
+                        <form method="POST" action="{{route('cpPaiement.update', $cp->id)}}" class="mt-6 space-y-6">
                             @csrf
                             @method('put')
 
@@ -25,26 +25,25 @@
                             </div>
                             <div>
                                 <div class="flex flex-row text-center items-center">
-                                    <label
-                                        class="block text-sm mr-[5.2rem] max-w-28 text-left text-wrap text-gray-700 font-semibold"
-                                        for="validation">Avis favorable</label>
-                                    <select name="avis_favorable" id="avis_favorable"
+                                    <x-input-label class="mr-[2.9rem] max-w-28 text-left text-wrap text-lg text-gray-500 font-semibold"
+                                        for="conformite_procedure" :value="__('Conformité Par rapport Aux Procédures')" />
+                                    <select name="conformite_procedure" id="conformite_procedure"
                                         class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
-                                        <option value="0" {{ $cp->avis_favorable === 0 ? 'selected' : '' }}>
+                                        <option value="0" {{ $cp->conformite_procedure === 0 ? 'selected' : '' }}>
                                         </option>
-                                        <option value="1" {{ $cp->avis_favorable === 1 ? 'selected' : '' }}>OUI
+                                        <option value="1" {{ $cp->conformite_procedure === 1 ? 'selected' : '' }}>OUI
                                         </option>
-                                        <option value="2" {{ $cp->avis_favorable === 2 ? 'selected' : '' }}>NON
+                                        <option value="2" {{ $cp->conformite_procedure === 2 ? 'selected' : '' }}>NON
                                         </option>
                                     </select>
                                 </div>
-                                <x-input-error class="mt-2" :messages="$errors->get('avis_favorable')" />
+                                <x-input-error class="mt-2" :messages="$errors->get('conformite_procedure')" />
                             </div>
                             <div>
                                 <div class="flex flex-row">
-                                    <x-input-label class="mr-[4.8rem] text-lg text-gray-500 font-semibold"
-                                        for="observations" :value="__('Observations')" />
-                                    <textarea class="border border-gray-300 border-solid w-full" name="observations" id="observations" rows="5">{{ old('observations', $cp->observations) }}</textarea>
+                                    <x-input-label class="mr-[4.8rem] text-lg text-gray-500 font-semibold" for="observations"
+                                        :value="__('Observations')" />
+                                    <textarea class="border border-gray-300 border-solid w-full" name="observations" id="observations" rows="5">{{old('observations', $cp->observations)}}</textarea>
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('observations')" />
                             </div>
