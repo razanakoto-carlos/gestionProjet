@@ -99,10 +99,19 @@
                                     $project->r_raf === 0 ||
                                     $project->r_rai === 0)
                                 <td class="p-4">
-                                    <p
+                                    {{-- <p
                                         class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer">
                                         en cours
-                                    </p>
+                                    </p> --}}
+                                    <x-modal-dashboard :responsables="[
+                                        'RSE' => $project->r_rse,
+                                        'RSENV' => $project->r_rsenv,
+                                        'BM' => $project->r_bm,
+                                        'CP' => $project->r_cp,
+                                        'DP' => $project->r_dp,
+                                        'RAF' => $project->r_raf,
+                                        'RAI' => $project->r_rai,
+                                    ]" :ProjectName="$project->nom_projet" :project="$project" :buttonText="'en Cours'" />
                                 </td>
                             @elseif (
                                 $project->r_rse === 1 &&
@@ -113,10 +122,19 @@
                                     $project->r_raf === 1 &&
                                     $project->r_rai === 1)
                                 <td class="p-4">
-                                    <p
+                                    {{-- <p
                                         class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
                                         Validé
-                                    </p>
+                                    </p> --}}
+                                    <x-modal-dashboard :responsables="[
+                                        'RSE' => $project->r_rse,
+                                        'RSENV' => $project->r_rsenv,
+                                        // 'BM' => $project->r_bm,
+                                        'CP' => $project->r_cp,
+                                        'DP' => $project->r_dp,
+                                        'RAF' => $project->r_raf,
+                                        'RAI' => $project->r_rai,
+                                    ]" :ProjectName="$project->nom_projet" :project="$project" :buttonText="'en Cours'" />
                                 </td>
                             @else
                                 <td class="p-4">
