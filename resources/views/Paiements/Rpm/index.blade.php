@@ -160,7 +160,6 @@
                                             $paiement->rpm->penalite_de_retard_travaux,
                                             $paiement->rpm->conformite_technique_biens,
                                             $paiement->rpm->pv_de_reception_biens,
-                                            $paiement->rpm->penalite_de_retard_biens,
                                             $paiement->rpm->conformite_rapport_facture,
                                             $paiement->rpm->conformite_dossier_paiement,
                                         ]" />

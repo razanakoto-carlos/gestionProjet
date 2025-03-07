@@ -99,19 +99,7 @@
                                     $project->r_raf === 0 ||
                                     $project->r_rai === 0)
                                 <td class="p-4">
-                                    {{-- <p
-                                        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer">
-                                        en cours
-                                    </p> --}}
-                                    <x-modal-dashboard :responsables="[
-                                        'RSE' => $project->r_rse,
-                                        'RSENV' => $project->r_rsenv,
-                                        'BM' => $project->r_bm,
-                                        'CP' => $project->r_cp,
-                                        'DP' => $project->r_dp,
-                                        'RAF' => $project->r_raf,
-                                        'RAI' => $project->r_rai,
-                                    ]" :ProjectName="$project->nom_projet" :project="$project" :buttonText="'en Cours'" />
+                                    <x-modal-requete  class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer" :project="$project" :buttonText="'en cours'" />
                                 </td>
                             @elseif (
                                 $project->r_rse === 1 &&
@@ -122,19 +110,7 @@
                                     $project->r_raf === 1 &&
                                     $project->r_rai === 1)
                                 <td class="p-4">
-                                    {{-- <p
-                                        class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
-                                        Validé
-                                    </p> --}}
-                                    <x-modal-dashboard :responsables="[
-                                        'RSE' => $project->r_rse,
-                                        'RSENV' => $project->r_rsenv,
-                                        // 'BM' => $project->r_bm,
-                                        'CP' => $project->r_cp,
-                                        'DP' => $project->r_dp,
-                                        'RAF' => $project->r_raf,
-                                        'RAI' => $project->r_rai,
-                                    ]" :ProjectName="$project->nom_projet" :project="$project" :buttonText="'en Cours'" />
+                                    <x-modal-requete  class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer" :project="$project" :buttonText="'Validé'" />
                                 </td>
                             @else
                                 <td class="p-4">
@@ -173,10 +149,7 @@
                                         $project->paiement->p_cp === 0 ||
                                         $project->paiement->p_ca === 0))
                                 <td class="p-4">
-                                    <p
-                                        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer">
-                                        en cours
-                                    </p>
+                                    <x-modal-paiement  class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer" :project="$project" :buttonText="'en cours'" />
                                 </td>
                             @elseif (
                                 $project->paiement &&
@@ -188,10 +161,7 @@
                                         $project->paiement->p_cp === 1 &&
                                         $project->paiement->p_ca === 1))
                                 <td class="p-4">
-                                    <p
-                                        class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer">
-                                        Validé
-                                    </p>
+                                    <x-modal-paiement  class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer" :project="$project" :buttonText="'Validé'" />
                                 </td>
                             @else
                                 <td class="p-4">

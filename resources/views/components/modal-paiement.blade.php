@@ -1,20 +1,27 @@
 <div x-data="{ open: false }">
     <!-- Open Modal Button -->
-    <button @click="open = true"
-        class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer">{{$buttonText ?? 'Open Modal' }}</button>
-
+        <button @click="open = true"
+            {{ $attributes->merge(['class' => 'w-full']) }}>{{ $buttonText ?? 'Open Modal' }}</button>
     <!-- Modal -->
-    <div x-show="open"
-        class="fixed inset-0 flex justify-center bg-black bg-opacity-50 items-center"
+    <div x-show="open" class="fixed inset-0 flex justify-center bg-black bg-opacity-50 items-center"
         x-transition.opacity>
-        <div class="bg-white p-6 rounded-lg shadow-lg w-1/2"
-            @click.outside="open = false" x-transition>
-            <div class="flex justify-end">
-                <button @click="open = false"
-                    class="text-red-500 text-2xl font-semibold">X</button>
+        <div class="bg-white p-6 rounded-lg shadow-lg w-1/2" @click.outside="open = false" x-transition>
+            <div class="flex  justify-end">
+                <button @click="open = false" class="text-red-500 text-2xl font-semibold">X</button>
             </div>
+            @php
+                $responsables = [
+                    'RSE' => $project->paiement->p_rse,
+                    'RPM' => $project->paiement->p_rpm,
+                    'CPT' => $project->paiement->p_cpt,
+                    'RAF' => $project->paiement->p_raf,
+                    'RAI' => $project->paiement->p_rai,
+                    'CP' => $project->paiement->p_cp,
+                    'CA' => $project->paiement->p_ca,
+                ];
+            @endphp
             <h2 class="text-xl font-semibold text-center p-4">Approbation des
-                requetes pour {{ $projectName }}</h2>
+                paiements pour {{ $project->nom_projet }}</h2>
             <hr>
             <table class="w-full text-left table-auto min-w-max text-slate-800">
                 <thead>
@@ -38,10 +45,16 @@
                 </thead>
                 <tbody>
                     @foreach ($responsables as $key => $responsable)
-                    <tr class="border-b">
+                        @if ($responsable === 0)
+                            <tr class="border-b">
+                            @elseif ($responsable === 1)
+                            <tr class="border-b bg-green-500">
+                            @else
+                            <tr class="border-b">
+                        @endif
                         <td class="p-2">
                             <p class="text-sm font-semibold">
-                               {{ $key}}
+                                {{ $key }}
                             </p>
                         </td>
                         <td class="p-2">
@@ -58,15 +71,18 @@
                         <td class="p-2">
                             <p class="text-sm font-semibold">
                                 @if ($responsable === 0)
-                                N/A
+                                    N/A
                                 @elseif ($responsable === 1)
-                               {{ optional($project->{Str::lower($key)}()->first())->observations ?? 'N/A'}}
+                                    @php
+                                        $name = Str::lower($key);
+                                    @endphp
+                                    {{ $project->paiement->$name->observations }}
                                 @else
-                                N/A
+                                    N/A
                                 @endif
                             </p>
                         </td>
-                    </tr>
+                        </tr>
                 </tbody>
                 @endforeach
             </table>

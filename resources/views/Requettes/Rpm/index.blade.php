@@ -130,7 +130,6 @@
                                         <x-rating-calculator :ratings="[
                                             $project->rpm->allocation_budgetaire,
                                             $project->rpm->prix_unitaire_etc,
-                                            $project->rpm->autres,
                                         ]" />
                                     </p>
                                 @else

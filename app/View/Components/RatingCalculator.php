@@ -24,6 +24,7 @@ class RatingCalculator extends Component
     public function render(): View|Closure|string
     {
         $average = (array_sum($this->ratings) * 100) / count($this->ratings);
+        $average = min($average, 100);
         return view('components.rating-calculator', ['average' => $average]);
     }
 }

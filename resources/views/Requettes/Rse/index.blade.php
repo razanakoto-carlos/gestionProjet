@@ -130,7 +130,7 @@
                                     <p class="text-sm">
                                         <x-rating-calculator :ratings="[
                                             $project->rse->conformite_tdr_ptba,
-                                            $project->rse->code_analytyque,
+                                            $project->rse->code_analytique,
                                             $project->rse->conformite_requete,
                                         ]" />
                                     </p>
