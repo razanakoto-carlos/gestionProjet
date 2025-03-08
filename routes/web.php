@@ -5,6 +5,7 @@ use App\Http\Controllers\CpController;
 use App\Http\Controllers\CpPaiementController;
 use App\Http\Controllers\CptPaiementController;
 use App\Http\Controllers\DpController;
+use App\Http\Controllers\pdfRequetteController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\RafController;
@@ -86,6 +87,10 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('caPaiement', CaPaiementController::class);
     Route::get('/search_dp_paiement', [CaPaiementController::class , 'search']);
+
+    //pdf
+    Route::get('/pdfRequette/{id}', [pdfRequetteController::class, 'pdf'])->name('pdfRequette');
+    Route::get('/pdfRequette/exporter/{id}', [pdfRequetteController::class, 'generatePDF'])->name('pdfRequette.exporter');
 
 });
 
