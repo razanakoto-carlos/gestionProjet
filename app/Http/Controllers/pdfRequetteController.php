@@ -11,6 +11,7 @@ class pdfRequetteController extends Controller
     
     public function pdf($id){
         $project = Project::findorFail($id);
+        
         return view('pdf.Requette.index', compact('project'));
     }
     
@@ -23,6 +24,6 @@ class pdfRequetteController extends Controller
         $pdf->setOption('margin-top', 10); 
         $pdf->setOption('margin-bottom', 10); 
         
-        return $pdf->download('circuit_approbation.pdf');
+        return $pdf->download('circuit_approbation_requetes.pdf');
     }
 }
