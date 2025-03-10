@@ -16,7 +16,7 @@
         <!-- Left: Sidebar Toggle & Logo -->
         <div class="flex items-center space-x-4 ml-12">
             <a href="{{ route('dashboard') }}" class="text-xl">
-                <i class="bi bi-speedometer mx-2"></i>Dashboard
+                <i class="bi bi-speedometer mx-2"></i>Tableau de bord
             </a>
         </div>
 

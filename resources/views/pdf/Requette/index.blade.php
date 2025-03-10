@@ -2,8 +2,13 @@
     <div>
         <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white 
                 shadow-md sm:rounded-t">
-            <div class="flex justify-center text-2xl my-3 text-gray-600">
+            <div class="flex justify-center text-2xl my-3 text-gray-600 font-semibold">
                 <h2>CIRCUIT D'APPROBATION DE REQUETES</h2>
+            </div>
+            <div class="flex justify-center text-2xl my-3 text-gray-600 font-semibold">
+                <h4>
+                    NOM DU PROJET: {{ $project->nom_projet }}
+                </h4>
             </div>
             <div class="flex justify-end mb-2">
                 <a href="{{ route('pdfRequette.exporter', $project->id) }}"
@@ -51,7 +56,7 @@
                 <tr>
                     <td>Controles des : <br>
                         - Code Analytique (composant + active) :
-                        - Montant PTBA: <strong>{{ $project->rse->montant_ptba }}</strong><br>
+                        - Montant PTBA: <strong>{{ $project->rse->montant_ptba }} Ar</strong><br>
                         - Conformite de la requette:<br>
                         - Conformite du TDR ou PTBA :
                     </td>

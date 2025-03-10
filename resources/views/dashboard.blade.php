@@ -214,8 +214,8 @@
                             <td class="grid grid-cols-1">
                                 <a href="{{route('pdfRequette', $project->id)}}"
                                     class="text-purple-800 border  border-purple-800 hover:text-white hover:bg-purple-800 transition ease-in-out my-2 px-3 pb-1 rounded">requête</a>
-                                <button
-                                    class="text-red-800 border border-red-800 hover:text-white transition ease-in-out hover:bg-red-800  px-3 pb-1 rounded">Paiements</button>
+                                <a href="{{route('pdfPaiement', $project->id)}}"
+                                    class="text-red-800 border border-red-800 hover:text-white transition ease-in-out hover:bg-red-800  px-3 pb-1 rounded">Paiements</a>
                             </td>
                         </tr>
                     @endforeach
