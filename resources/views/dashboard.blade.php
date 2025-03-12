@@ -1,244 +1,365 @@
 <x-card-dashboard>
-    <div>
-        <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white 
-                shadow-md  sm:rounded-t">
-            <div class="flex justify-between">
-                @can('isDP')
-                    <div>
-                        <a href="{{ route('project.create') }}"
-                            class="flex justify-center items-center m-3 ml-24 transition ease-in-out bg-blue-500 hover:bg-blue-600 px-4 py-2 border h-8 
-                        text-center w-52 shadow-md text-white font-bold">
-                            <i class="bi bi-plus-lg mx-2"></i>NOUVEAU PROJET</a>
-                    </div>
-                @endcan
-                <form method="get" action="/search" class="mt-2 ml-4">
-                    <input type="text" name="search" class="h-8" placeholder="Search">
-                    <button
-                        class="mr-6 py-1 px-3 font-semibold bg-green-500 hover:bg-green-600 transition ease-in-out text-white">
-                        RECHERCHER</button>
-                </form>
-            </div>
-            <div class="flex justify-center text-2xl my-3 text-gray-600">
-                <h2>CIRCUIT D'APPROBATION DE REQUETES</h2>
-            </div>
-        </div>
-        <div
-            class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white 
-                shadow-md sm:rounded-b">
-            <table class="w-full text-left table-auto min-w-max text-slate-800">
-                <thead>
-                    <tr class="text-black border-b">
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Project
-                            </p>
-                        </th>
-                        <th class="py-2 pl-6 pr-4">
-                            <p class="text-md leading-none font-semibold">
-                                Date
-                            </p>
-                        </th>
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Requête
-                            </p>
-                        </th>
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Statut Requête
-                            </p>
-                        </th>
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Paiements
-                            </p>
-                        </th>
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Statut Paiements
-                            </p>
-                        </th>
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Fichier
-                            </p>
-                        </th>
-                        @can('isDP')
-                            <th class="p-4">
-                                <p class="text-md leading-none font-semibold">
-                                    Action
-                                </p>
-                            </th>
-                        @endcan
-                        <th class="p-4">
-                            <p class="text-md leading-none font-semibold">
-                                Exporter
-                            </p>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($projects as $project)
-                        <tr class="border-b">
-                            <td class="py-2 pl-4 max-w-7">
-                                <p class="text-sm font-semibold text-gray-600">
-                                    {{ $project->nom_projet }}
-                                </p>
-                            </td>
-                            <td class="py-2 pl-6 pr-4">
-                                <p class="text-sm">
-                                    {{ $project->date }}
-                                </p>
-                            </td>
-                            @if (
-                                $project->r_rse === 0 ||
-                                    $project->r_rsenv === 0 ||
-                                    $project->r_bm === 0 ||
-                                    $project->r_cp === 0 ||
-                                    $project->r_dp === 0 ||
-                                    $project->r_raf === 0 ||
-                                    $project->r_rai === 0)
-                                <td class="p-4">
-                                    <x-modal-requete  class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer" :project="$project" :buttonText="'en cours'" />
-                                </td>
-                            @elseif (
-                                $project->r_rse === 1 &&
-                                    $project->r_rsenv === 1 &&
-                                    $project->r_bm === 1 &&
-                                    $project->r_cp === 1 &&
-                                    $project->r_dp === 1 &&
-                                    $project->r_raf === 1 &&
-                                    $project->r_rai === 1)
-                                <td class="p-4">
-                                    <x-modal-requete  class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer" :project="$project" :buttonText="'Validé'" />
-                                </td>
-                            @else
-                                <td class="p-4">
-                                    <p
-                                        class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
-                                        Non Validé
-                                    </p>
-                                </td>
-                            @endif
+  <div>
+      <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white
+              shadow-md  sm:rounded-t">
+          <div class="flex justify-between">
+              @can('isDP')
+                  <div>
+                      <a href="{{ route('project.create') }}"
+                          class="flex justify-center items-center m-3 ml-24 transition ease-in-out bg-blue-500 hover:bg-blue-600 px-4 py-2 border h-8
+                      text-center w-52 shadow-md text-white font-bold">
+                          <i class="bi bi-plus-lg mx-2"></i>NOUVEAU PROJET</a>
+                  </div>
+              @endcan
+              <form method="get" action="/search" class="mt-2 ml-4">
+                  <input type="text" name="search" class="h-8" placeholder="Search">
+                  <button
+                      class="mr-6 py-1 px-3 font-semibold bg-green-500 hover:bg-green-600 transition ease-in-out text-white">
+                      RECHERCHER</button>
+              </form>
+          </div>
+          <div class="flex justify-center text-2xl my-3 text-gray-600">
+              <h2>CIRCUIT D'APPROBATION DE REQUETES</h2>
+          </div>
+          <div class="flex gap-5 items-center m-4">
+              <p>Filtrer les requêtes et paiements</p>
+              <select id="filter" class="rounded w-64 text-gray-700 border-gray-600">
+                  <option value="aucun">Aucun</option>
+                  <option value="valide">Requete validé</option>
+                  <option value="paiementValide">Paiement validé</option>
+                  <option value="enCours">Requete en cours</option>
+                  <option value="paiementEnCours">Paiement en cours</option>
+                  <option value="nonValide">Requete non validé</option>
+                  <option value="paiementNonValide">Paiement non validé</option>
+              </select>
+          </div>
+      </div>
+      <div
+          class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white
+              shadow-md sm:rounded-b">
+          <table class="w-full text-left table-auto min-w-max text-slate-800">
+              <thead>
+                  <tr class="text-black border-b">
+                      <th class="p-4">
+                          <p class="text-md leading-none font-semibold">
+                              Project
+                          </p>
+                      </th>
+                      <th class="py-2 pl-6 pr-4">
+                          <p class="text-md leading-none font-semibold">
+                              Date
+                          </p>
+                      </th>
+                      <th class="p-4">
+                          <p class="text-md leading-none font-semibold">
+                              Requête
+                          </p>
+                      </th>
+                      <th class="p-4">
+                          <p class="text-md leading-none font-semibold">
+                              Statut Requête
+                          </p>
+                      </th>
+                      <th class="p-4">
+                          <p class="text-md leading-none font-semibold">
+                              Paiements
+                          </p>
+                      </th>
+                      <th class="p-4">
+                          <p class="text-md leading-none font-semibold">
+                              Statut Paiements
+                          </p>
+                      </th>
+                      <th class="p-4">
+                          <p class="text-md leading-none font-semibold">
+                              Fichier
+                          </p>
+                      </th>
+                      @can('isDP')
+                          <th class="p-4">
+                              <p class="text-md leading-none font-semibold">
+                                  Action
+                              </p>
+                          </th>
+                      @endcan
+                      <th class="p-4">
+                          <p class="text-md leading-none font-semibold">
+                              Exporter
+                          </p>
+                      </th>
+                  </tr>
+              </thead>
+              <tbody id="project-table-body">
+                  @foreach ($projects as $project)
+                      <tr class="border-b" data-project='@json($project)'
+                          data-paiement='@json($project->paiement)'>
+                          <td class="py-2 pl-4 max-w-7">
+                              <p class="text-sm font-semibold text-gray-600">
+                                  {{ $project->nom_projet }}
+                              </p>
+                          </td>
+                          <td class="py-2 pl-6 pr-4">
+                              <p class="text-sm">
+                                  {{ $project->date }}
+                              </p>
+                          </td>
+                          @if (
+                              $project->r_rse === 0 ||
+                                  $project->r_rsenv === 0 ||
+                                  $project->r_bm === 0 ||
+                                  $project->r_cp === 0 ||
+                                  $project->r_dp === 0 ||
+                                  $project->r_raf === 0 ||
+                                  $project->r_rai === 0)
+                              <td class="p-4">
+                                  <x-modal-requete
+                                      class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer"
+                                      :project="$project" :buttonText="'en cours'" />
+                              </td>
+                          @elseif (
+                              $project->r_rse === 1 &&
+                                  $project->r_rsenv === 1 &&
+                                  $project->r_bm === 1 &&
+                                  $project->r_cp === 1 &&
+                                  $project->r_dp === 1 &&
+                                  $project->r_raf === 1 &&
+                                  $project->r_rai === 1)
+                              <td class="p-4">
+                                  <x-modal-requete
+                                      class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer"
+                                      :project="$project" :buttonText="'Validé'" />
+                              </td>
+                          @else
+                              <td class="p-4">
+                                  <p
+                                      class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                      Non Validé
+                                  </p>
+                              </td>
+                          @endif
 
-                            <td class="p-4">
-                                @if ($project->count())
-                                    <p class="text-sm">
-                                        <x-rating-calculator :ratings="[
-                                            $project->r_rse,
-                                            $project->r_bm,
-                                            $project->r_raf,
-                                            $project->r_rai,
-                                            $project->r_cp,
-                                            $project->r_dp,
-                                        ]" />
-                                    </p>
-                                @else
-                                    <p class="text-sm">
-                                        00.00%
-                                    </p>
-                                @endif
-                            </td>
-                            @if (
-                                $project->paiement &&
-                                    ($project->paiement->p_rpm === 0 ||
-                                        $project->paiement->p_rse === 0 ||
-                                        $project->paiement->p_cpt === 0 ||
-                                        $project->paiement->p_raf === 0 ||
-                                        $project->paiement->p_rai === 0 ||
-                                        $project->paiement->p_cp === 0 ||
-                                        $project->paiement->p_ca === 0))
-                                <td class="p-4">
-                                    <x-modal-paiement  class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer" :project="$project" :buttonText="'en cours'" />
-                                </td>
-                            @elseif (
-                                $project->paiement &&
-                                    ($project->paiement->p_rpm === 1 &&
-                                        $project->paiement->p_rse === 1 &&
-                                        $project->paiement->p_cpt === 1 &&
-                                        $project->paiement->p_raf === 1 &&
-                                        $project->paiement->p_rai === 1 &&
-                                        $project->paiement->p_cp === 1 &&
-                                        $project->paiement->p_ca === 1))
-                                <td class="p-4">
-                                    <x-modal-paiement  class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer" :project="$project" :buttonText="'Validé'" />
-                                </td>
-                            @else
-                                <td class="p-4">
-                                    <p
-                                        class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
-                                        Non Validé
-                                    </p>
-                                </td>
-                            @endif
-                            <td class="p-4">
-                                <p href="#" class="text-sm">
-                                    @if ($project->paiement()->count())
-                                        <p class="text-sm">
-                                            <x-rating-calculator :ratings="[
-                                                $project->paiement->p_rpm,
-                                                $project->paiement->p_rse,
-                                                $project->paiement->p_cpt,
-                                                $project->paiement->p_raf,
-                                                $project->paiement->p_rai,
-                                                $project->paiement->p_cp,
-                                                $project->paiement->p_ca,
-                                            ]" />
-                                        </p>
-                                    @else
-                                        <p class="text-sm">
-                                            00.00%
-                                        </p>
-                                    @endif
-                                </p>
-                            </td>
-                            <td class="p-4">
-                                <p href="#" class="text-sm font-normal ">
-                                    @foreach (json_decode($project->fichier) as $file)
-                                        <a href="{{ asset('storage/' . $file) }}" target="_blank"
-                                            class="text-gray-600 hover:underline hover:text-gray-800">{{ basename($file) }}</a><br>
-                                    @endforeach
-                                </p>
-                            </td>
-                            @can('isDP')
-                                <td class="p-4">
-                                    <form id="delete-form" action="{{ route('project.destroy', $project->id) }}"
-                                        method="post">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="button" onclick="confirmDelete(this)"
-                                            class="bg-red-500 hover:bg-red-600 hover:shadow-none px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
-                                    </form>
-                                </td>
-                            @endcan
-                            <td class="grid grid-cols-1">
-                                <a href="{{route('pdfRequette', $project->id)}}"
-                                    class="text-purple-800 border  border-purple-800 hover:text-white hover:bg-purple-800 transition ease-in-out my-2 px-3 pb-1 rounded">requête</a>
-                                <a href="{{route('pdfPaiement', $project->id)}}"
-                                    class="text-red-800 border border-red-800 hover:text-white transition ease-in-out hover:bg-red-800  px-3 pb-1 rounded">Paiements</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <script>
-        function confirmDelete(button) {
-            Swal.fire({
-                title: 'Êtes-vous sûr ?',
-                text: "Cette action est irréversible !",
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonColor: '#3085d6',
-                cancelButtonColor: '#d33',
-                confirmButtonText: 'Oui, supprimer !',
-                cancelButtonText: 'Annuler'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    button.closest('form').submit();
-                }
-            });
-        }
-    </script>
+                          <td class="p-4">
+                              @if ($project->count())
+                                  <p class="text-sm">
+                                      <x-rating-calculator :ratings="[
+                                          $project->r_rse,
+                                          $project->r_bm,
+                                          $project->r_raf,
+                                          $project->r_rai,
+                                          $project->r_cp,
+                                          $project->r_dp,
+                                      ]" />
+                                  </p>
+                              @else
+                                  <p class="text-sm">
+                                      00.00%
+                                  </p>
+                              @endif
+                          </td>
+                          @if (
+                              $project->paiement &&
+                                  ($project->paiement->p_rpm === 0 ||
+                                      $project->paiement->p_rse === 0 ||
+                                      $project->paiement->p_cpt === 0 ||
+                                      $project->paiement->p_raf === 0 ||
+                                      $project->paiement->p_rai === 0 ||
+                                      $project->paiement->p_cp === 0 ||
+                                      $project->paiement->p_ca === 0))
+                              <td class="p-4">
+                                  <x-modal-paiement
+                                      class="text-xs hover:shadow-transparent border transition ease-in-out duration-300 shadow shadow-gray-700 p-2 uppercase font-semibold text-center cursor-pointer"
+                                      :project="$project" :buttonText="'en cours'" />
+                              </td>
+                          @elseif (
+                              $project->paiement &&
+                                  ($project->paiement->p_rpm === 1 &&
+                                      $project->paiement->p_rse === 1 &&
+                                      $project->paiement->p_cpt === 1 &&
+                                      $project->paiement->p_raf === 1 &&
+                                      $project->paiement->p_rai === 1 &&
+                                      $project->paiement->p_cp === 1 &&
+                                      $project->paiement->p_ca === 1))
+                              <td class="p-4">
+                                  <x-modal-paiement
+                                      class="text-xs text-white bg-green-600 hover:shadow-transparent border-green-700 transition ease-in-out duration-300 shadow shadow-green-800 p-2 uppercase font-semibold text-center cursor-pointer"
+                                      :project="$project" :buttonText="'Validé'" />
+                              </td>
+                          @else
+                              <td class="p-4">
+                                  <p
+                                      class="text-xs text-white bg-yellow-600 hover:shadow-transparent border-yellow-700 transition ease-in-out duration-300 shadow shadow-yellow-800 p-2 uppercase font-semibold text-center cursor-pointer">
+                                      Non Validé
+                                  </p>
+                              </td>
+                          @endif
+                          <td class="p-4">
+                              <p href="#" class="text-sm">
+                                  @if ($project->paiement()->count())
+                                      <p class="text-sm">
+                                          <x-rating-calculator :ratings="[
+                                              $project->paiement->p_rpm,
+                                              $project->paiement->p_rse,
+                                              $project->paiement->p_cpt,
+                                              $project->paiement->p_raf,
+                                              $project->paiement->p_rai,
+                                              $project->paiement->p_cp,
+                                              $project->paiement->p_ca,
+                                          ]" />
+                                      </p>
+                                  @else
+                                      <p class="text-sm">
+                                          00.00%
+                                      </p>
+                                  @endif
+                              </p>
+                          </td>
+                          <td class="p-4">
+                              <p href="#" class="text-sm font-normal ">
+                                  @foreach (json_decode($project->fichier) as $file)
+                                      <a href="{{ asset('storage/' . $file) }}" target="_blank"
+                                          class="text-gray-600 hover:underline hover:text-gray-800">{{ basename($file) }}</a><br>
+                                  @endforeach
+                              </p>
+                          </td>
+                          @can('isDP')
+                              <td class="p-4">
+                                  <form id="delete-form" action="{{ route('project.destroy', $project->id) }}"
+                                      method="post">
+                                      @csrf
+                                      @method('DELETE')
+                                      <button type="button" onclick="confirmDelete(this)"
+                                          class="bg-red-500 hover:bg-red-600 hover:shadow-none px-4 py-1 border shadow-md text-white font-bold">SUPPRIMER</button>
+                                  </form>
+                              </td>
+                          @endcan
+                          <td class="grid grid-cols-1">
+                              <a href="{{ route('pdfRequette', $project->id) }}"
+                                  class="text-purple-800 border  border-purple-800 hover:text-white hover:bg-purple-800 transition ease-in-out my-2 px-3 pb-1 rounded">requête</a>
+                              <a href="{{ route('pdfPaiement', $project->id) }}"
+                                  class="text-red-800 border border-red-800 hover:text-white transition ease-in-out hover:bg-red-800  px-3 pb-1 rounded">Paiements</a>
+                          </td>
+                      </tr>
+                  @endforeach
+              </tbody>
+          </table>
+      </div>
+  </div>
+  <script>
+      function confirmDelete(button) {
+          Swal.fire({
+              title: 'Êtes-vous sûr ?',
+              text: "Cette action est irréversible !",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              confirmButtonText: 'Oui, supprimer !',
+              cancelButtonText: 'Annuler'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  button.closest('form').submit();
+              }
+          });
+      }
+  </script>
+  <script>
+      const filterSelect = document.getElementById("filter");
+      const tableBody = document.getElementById("project-table-body");
+
+      // Function to filter projects
+      function filterProjects() {
+          const selectedFilter = filterSelect.value;
+          const rows = tableBody.querySelectorAll("tr");
+
+          rows.forEach(row => {
+              // Get the data-project attribute
+              const dataProject = row.getAttribute("data-project");
+              const dataPaiement = row.getAttribute("data-paiement");
+
+              // If data-project exists, proceed with filtering
+              if (dataProject || dataPaiement) {
+                  try {
+                      const project = JSON.parse(dataProject);
+                      const paiement = JSON.parse(dataPaiement);
+
+                      let showRow = false;
+
+                      // Apply the filters based on selected filter
+                      if (selectedFilter === "aucun") {
+                          showRow = true;
+                      } else if (selectedFilter === "valide") {
+                          showRow = project &&
+                              project.r_rse === 1 &&
+                              project.r_rsenv === 1 &&
+                              project.r_bm === 1 &&
+                              project.r_raf === 1 &&
+                              project.r_rai === 1 &&
+                              project.r_cp === 1 &&
+                              project.r_dp === 1;
+                      } else if (selectedFilter === "enCours") {
+                          showRow = project && (
+                              project.r_rse === 0 ||
+                              project.r_rsenv === 0 ||
+                              project.r_bm === 0 ||
+                              project.r_raf === 0 ||
+                              project.r_rai === 0 ||
+                              project.r_cp === 0 ||
+                              project.r_dp === 0);
+                      } else if (selectedFilter === "nonValide") {
+                          showRow = project && (
+                              project.r_rse === 2 ||
+                              project.r_rsenv === 2 ||
+                              project.r_bm === 2 ||
+                              project.r_raf === 2 ||
+                              project.r_rai === 2 ||
+                              project.r_cp === 2 ||
+                              project.r_dp === 2);
+                      } else if (selectedFilter === "paiementValide") {
+                          showRow = paiement &&
+                              paiement.p_rse === 1 &&
+                              paiement.p_rpm === 1 &&
+                              paiement.p_raf === 1 &&
+                              paiement.p_rai === 1 &&
+                              paiement.p_cp === 1 &&
+                              paiement.p_cpt === 1 &&
+                              paiement.p_ca === 1;
+                      } else if (selectedFilter === "paiementEnCours") {
+                          showRow = paiement &&
+                              (paiement.p_rse === 0 ||
+                                  paiement.p_rpm === 0 ||
+                                  paiement.p_raf === 0 ||
+                                  paiement.p_rai === 0 ||
+                                  paiement.p_cp === 0 ||
+                                  paiement.p_cpt === 0 ||
+                                  paiement.p_ca === 0);
+                      } else if (selectedFilter === "paiementNonValide") {
+                          showRow = paiement &&
+                              (paiement.p_rse === 2 ||
+                                  paiement.p_rpm === 2 ||
+                                  paiement.p_raf === 2 ||
+                                  paiement.p_rai === 2 ||
+                                  paiement.p_cp === 2 ||
+                                  paiement.p_cpt === 2 ||
+                                  paiement.p_ca === 2);
+                      }
+
+                      // Show or hide the row based on the filter
+                      row.style.display = showRow ? "" : "none";
+                  } catch (e) {
+                      console.error("Invalid JSON in data-project for row", row, e);
+                      row.style.display = "none";
+                  }
+              } else {
+                  // Skip rows without data-project
+                  row.style.display = "none";
+              }
+          });
+      }
+
+      // Event listener to handle filter change
+      filterSelect.addEventListener("change", filterProjects);
+
+      // Initial filtering on page load
+      filterProjects();
+  </script>
 </x-card-dashboard>

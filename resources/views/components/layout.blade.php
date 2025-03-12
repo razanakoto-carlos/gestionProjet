@@ -65,7 +65,7 @@
                 <x-slot name='trigger'>
                     <div tabindex="0"
                         class="mt-12 my-4 text-black cursor-pointer hover:bg-gray-800 hover:w-full hover:font-semibold transition-all
-                                p-1 hover:rounded text-base hover:text-white focus:bg-gray-800 
+                                p-1 hover:rounded text-base hover:text-white focus:bg-gray-800
                                 focus:font-semibold focus:p-1 focus:rounded focus:text-white">
                         <i class="bi bi-card-list mx-1 text-lg "></i>Approbation requêtes
                     </div>
@@ -130,7 +130,7 @@
                 <x-slot name='trigger'>
                     <div tabindex="0"
                         class="mb-4 text-black cursor-pointer hover:bg-gray-800 hover:w-full hover:font-semibold transition-all ease-in-out
-                                p-1 hover:rounded hover:text-white focus:bg-gray-800 
+                                p-1 hover:rounded hover:text-white focus:bg-gray-800
                                 focus:font-semibold focus:p-1 focus:rounded focus:text-white text-nowrap overflow-hidden">
                         <i class="bi bi-cash mx-1"></i>Approbation de paiements
                     </div>
@@ -192,7 +192,7 @@
             </x-dropdown-menu>
             <a tabindex="0" href="{{ route('profile.index') }}"
                 class=" text-black hover:bg-gray-800 hover:font-semibold transition-all
-                 ease-in-out p-1 hover:rounded hover:text-white focus:bg-gray-800 focus:font-semibold focus:p-1 
+                 ease-in-out p-1 hover:rounded hover:text-white focus:bg-gray-800 focus:font-semibold focus:p-1
                  focus:rounded focus:text-white text-nowrap">
                 <i class="bi bi-people-fill mx-1"></i>Gestion des Utilisateus
             </a>
