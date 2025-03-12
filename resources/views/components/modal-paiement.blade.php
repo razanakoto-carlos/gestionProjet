@@ -1,7 +1,7 @@
 <div x-data="{ open: false }">
     <!-- Open Modal Button -->
-        <button @click="open = true"
-            {{ $attributes->merge(['class' => 'w-full']) }}>{{ $buttonText ?? 'Open Modal' }}</button>
+    <button @click="open = true"
+        {{ $attributes->merge(['class' => 'w-full']) }}>{{ $buttonText ?? 'Open Modal' }}</button>
     <!-- Modal -->
     <div x-show="open" class="fixed inset-0 flex justify-center bg-black bg-opacity-50 items-center"
         x-transition.opacity>
@@ -23,69 +23,41 @@
             <h2 class="text-xl font-semibold text-center p-4">Approbation des
                 paiements pour {{ $project->nom_projet }}</h2>
             <hr>
-            <table class="w-full text-left table-auto min-w-max text-slate-800">
-                <thead>
-                    <tr class="text-black border-b">
-                        <th class="p-2">
-                            <p class="text-md font-semibold">
-                                Responsable
-                            </p>
-                        </th>
-                        <th class="p-2">
-                            <p class="text-md font-semibold">
-                                Validation
-                            </p>
-                        </th>
-                        <th class="p-2">
-                            <p class="text-md font-semibold">
-                                Observation
-                            </p>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($responsables as $key => $responsable)
-                        @if ($responsable === 0)
-                            <tr class="border-b">
-                            @elseif ($responsable === 1)
-                            <tr class="border-b bg-green-500">
-                            @else
-                            <tr class="border-b">
-                        @endif
-                        <td class="p-2">
-                            <p class="text-sm font-semibold">
-                                {{ $key }}
-                            </p>
-                        </td>
-                        <td class="p-2">
-                            <p class="text-sm font-semibold">
-                                @if ($responsable === 0)
-                                    En attente de reponse
-                                @elseif ($responsable === 1)
-                                    OUI
-                                @else
-                                    N/A
-                                @endif
-                            </p>
-                        </td>
-                        <td class="p-2">
-                            <p class="text-sm font-semibold">
-                                @if ($responsable === 0)
-                                    N/A
-                                @elseif ($responsable === 1)
-                                    @php
-                                        $name = Str::lower($key);
-                                    @endphp
-                                    {{ $project->paiement->$name->observations }}
-                                @else
-                                    N/A
-                                @endif
-                            </p>
-                        </td>
-                        </tr>
-                </tbody>
-                @endforeach
-            </table>
+            <div class="w-full text-left text-slate-800">
+              <ul class="min-w-max">
+                  <li class="text-black border-b flex">
+                      <span class="p-2 text-md font-semibold w-1/3">Responsable</span>
+                      <span class="p-2 text-md font-semibold w-1/3">Validation</span>
+                      <span class="p-2 text-md font-semibold w-1/3">Observation</span>
+                  </li>
+                  @foreach ($responsables as $key => $responsable)
+                      <li class="border-b flex {{ $responsable === 1 ? 'bg-green-500' : '' }}">
+                          <span class="p-2 text-sm font-semibold w-1/3">{{ $key }}</span>
+                          <span class="p-2 text-sm font-semibold w-1/3">
+                              @if ($responsable === 0)
+                                  En attente de reponse
+                              @elseif ($responsable === 1)
+                                  OUI
+                              @else
+                                  N/A
+                              @endif
+                          </span>
+                          <span class="p-2 text-sm font-semibold w-1/3">
+                              @if ($responsable === 0)
+                                  N/A
+                              @elseif ($responsable === 1)
+                                  @php
+                                      $name = Str::lower($key);
+                                  @endphp
+                                  {{ $project->paiement->$name->observations }}
+                              @else
+                                  N/A
+                              @endif
+                          </span>
+                      </li>
+                  @endforeach
+              </ul>
+          </div>
         </div>
     </div>
 </div>

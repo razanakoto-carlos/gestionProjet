@@ -287,7 +287,8 @@
                       // Apply the filters based on selected filter
                       if (selectedFilter === "aucun") {
                           showRow = true;
-                      } else if (selectedFilter === "valide") {
+                      }
+                      else if (selectedFilter === "valide") {
                           showRow = project &&
                               project.r_rse === 1 &&
                               project.r_rsenv === 1 &&
