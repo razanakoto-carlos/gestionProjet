@@ -27,10 +27,18 @@ class RafPaiementController extends Controller
             return redirect()->route('rafPaiement.index');
         }
 
-        $paiements = Paiement::whereHas('project', function ($query) use ($request) {
-            $query->where('nom_projet', 'like', "%{$request->search}%");
-        })->with('project') // Charger la relation 'project' pour accéder aux données du projet si nécessaire
-            ->get();
+        $paiements = Paiement::whereHas('project', function ($query) use ($searchTerm) {
+            $query->where('nom_projet', 'like', "%{$searchTerm}%")
+                  ->where('r_rse', 1)
+                  ->where('r_bm', 1)
+                  ->where('r_rsenv', 1)
+                  ->where('r_raf', 1)
+                  ->where('r_rai', 1)
+                  ->where('r_cp', 1)
+                  ->where('r_dp', 1);
+        })
+        ->with('project')
+        ->paginate(5);
 
         return view('Paiements.Raf.index', compact('paiements'));
     }

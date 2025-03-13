@@ -7,7 +7,6 @@
     <title>Circuit d'approbation de requêtes</title>
     @notifyCss
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <script src="{{asset('vendor/mckenziearts/laravel-notify/js/notify.js')}}" defer></script>
 </head>
 
 <body class="bg-gray-100">

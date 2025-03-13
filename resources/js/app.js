@@ -7,4 +7,6 @@ import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 window.Swal = Swal;
 
-Alpine.start();
+Alpine.defer(() => {
+    Alpine.start();
+});

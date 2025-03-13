@@ -21,19 +21,29 @@ class RpmPaiementController extends Controller
         $request->validate([
             'search' => 'nullable|string|max:255',
         ]);
+
         $searchTerm = $request->input('search', '');
 
         if (empty($searchTerm)) {
             return redirect()->route('rpmPaiement.index');
         }
 
-        $paiements = Paiement::whereHas('project', function ($query) use ($request) {
-            $query->where('nom_projet', 'like', "%{$request->search}%");
-        })->with('project') // Charger la relation 'project' pour accéder aux données du projet si nécessaire
-            ->get();
+        $paiements = Paiement::whereHas('project', function ($query) use ($searchTerm) {
+            $query->where('nom_projet', 'like', "%{$searchTerm}%")
+                  ->where('r_rse', 1)
+                  ->where('r_bm', 1)
+                  ->where('r_rsenv', 1)
+                  ->where('r_raf', 1)
+                  ->where('r_rai', 1)
+                  ->where('r_cp', 1)
+                  ->where('r_dp', 1);
+        })
+        ->with('project')
+        ->paginate(5);
 
-        return view('Paiements.Rpm.index', compact('$paiements'));
+        return view('Paiements.Rpm.index', compact('paiements'));
     }
+
     /**
      * Display a listing of the resource.
      */
