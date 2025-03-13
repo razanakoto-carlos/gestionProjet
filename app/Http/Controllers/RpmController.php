@@ -88,7 +88,7 @@ class RpmController extends Controller
         }
         $rpm = Rpm::findorFail($id);
         $project = $rpm->project;
-  
+
         if ($request->input('allocation_budgetaire') == 1 && $request->input('prix_unitaire_etc') == 1 && $request->input('autres')) {
             $project->r_bm = 1;
             $project->save();
@@ -100,8 +100,8 @@ class RpmController extends Controller
         $rpm->autres = $request->input('autres');
         $rpm->observations = $request->input('observations');
         $rpm->save();
-
-        return redirect()->route('rpm.index')->with('message', 'Validation enregistrées !!!' );
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('rpm.index');
     }
 
     /**

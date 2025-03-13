@@ -5,11 +5,12 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Circuit d'approbation de requêtes</title>
+    @notifyCss
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <script src="{{asset('vendor/mckenziearts/laravel-notify/js/notify.js')}}" defer></script>
 </head>
 
 <body class="bg-gray-100">
-
     <!-- Top Navbar (Always on top) -->
     <header class="bg-[#39444e] text-white px-4 py-1 flex justify-between items-center fixed top-0 left-0 w-full z-50">
 
@@ -19,7 +20,6 @@
                 <i class="bi bi-speedometer mx-2"></i>Tableau de bord
             </a>
         </div>
-
         <!-- Right: User Profile & Logout (Navbar) -->
         <div class="flex items-center space-x-4">
             <x-dropdown>
@@ -29,7 +29,7 @@
                             $user = Auth::user();
                         @endphp
                         @if ($user->image_user)
-                            <img src="{{ asset('storage/images/'.$user->image_user) }}" alt="User Avatar"
+                            <img src="{{ asset('storage/images/' . $user->image_user) }}" alt="User Avatar"
                                 class="w-10 h-10 rounded-full object-cover">
                         @else
                             <img src="{{ asset('images/default-user.jpg') }}" alt="User Avatar"
@@ -77,7 +77,7 @@
                             @can('isRse')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('rse.index')}}">>
+                                        href="{{ route('rse.index') }}">>
                                         Rsp planification Suivi-
                                         <br>Evaluation (RSE)</a>
                                 </li>
@@ -85,40 +85,40 @@
                             @can('isRsenv')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('rsenv.index')}}">> Rsp
+                                        href="{{ route('rsenv.index') }}">> Rsp
                                         Resp Sauvegarde Env/le et Sociale (RSENV)</a>
                                 </li>
                             @endcan
                             @can('isRpm')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{ route('rpm.index')}}">> Bureau
+                                        href="{{ route('rpm.index') }}">> Bureau
                                         des Marchés (RPM)</a>
                                 </li>
                             @endcan
                             @can('isRaf')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('raf.index')}}">> Rsp
+                                        href="{{ route('raf.index') }}">> Rsp
                                         Admin et Financier (RAF)</a>
                                 </li>
                             @endcan
                             @can('isRai')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('rai.index')}}">> Rsp
+                                        href="{{ route('rai.index') }}">> Rsp
                                         Audit Interne (RAI)</a>
                                 </li>
                             @endcan
                             @can('isCp')
                                 <li class="border-b-2"> <a
                                         class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('cp.index')}}">> Charge
+                                        href="{{ route('cp.index') }}">> Charge
                                         des Programmes (CP)</a></li>
                             @endcan
                             @can('isDP')
                                 <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('dp.index')}}">>
+                                        href="{{ route('dp.index') }}">>
                                         Coordonnateur de Projet (DP)</a>
                                 </li>
                             @endcan
@@ -142,7 +142,7 @@
                             @can('isRse')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('rsePaiement.index')}}">>
+                                        href="{{ route('rsePaiement.index') }}">>
                                         Rsp planification Suivi-
                                         <br>Evaluation (RSE)</a>
                                 </li>
@@ -150,39 +150,39 @@
                             @can('isRpm')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('rpmPaiement.index')}}">> Bureau
+                                        href="{{ route('rpmPaiement.index') }}">> Bureau
                                         des Marchés (RPM)</a>
                                 </li>
                             @endcan
                             @can('isCpt')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('cptPaiement.index')}}">> Comptabilite (CPT)</a>
+                                        href="{{ route('cptPaiement.index') }}">> Comptabilite (CPT)</a>
                                 </li>
                             @endcan
                             @can('isRaf')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('rafPaiement.index')}}">> Rsp
+                                        href="{{ route('rafPaiement.index') }}">> Rsp
                                         Admin et Financier (RAF)</a>
                                 </li>
                             @endcan
                             @can('isRai')
                                 <li class="border-b-2">
                                     <a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('raiPaiement.index')}}">> Rsp
+                                        href="{{ route('raiPaiement.index') }}">> Rsp
                                         Audit Interne (RAI)</a>
                                 </li>
                             @endcan
                             @can('isCp')
                                 <li class="border-b-2"> <a
                                         class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('cpPaiement.index')}}">> Charge
+                                        href="{{ route('cpPaiement.index') }}">> Charge
                                         des Programmes (CP)</a></li>
                             @endcan
                             @can('isDP')
                                 <li><a class="text-sm block text-slate-700 font-semibold text-nowrap overflow-hidden mb-2"
-                                        href="{{route('caPaiement.index')}}">>
+                                        href="{{ route('caPaiement.index') }}">>
                                         Coordonnateur de Projet (CA)</a>
                                 </li>
                             @endcan
@@ -198,11 +198,12 @@
             </a>
         </aside>
         <!-- Main Content (Starts Below Navbar) -->
+        <div class="fixed top-5 left-1/2 z-[999]">
+            <x-notify::notify />
+        </div>
         <div class="flex-1 p-6 overflow-auto  bg-[#EBEFF2]">
             {{ $slot }}
         </div>
     </div>
-
 </body>
-
 </html>

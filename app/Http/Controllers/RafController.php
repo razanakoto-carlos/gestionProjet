@@ -99,8 +99,8 @@ class RafController extends Controller
         $raf->validation = $request->input('validation');
         $raf->observations = $request->input('observations');
         $raf->save();
-
-        return redirect()->route('raf.index')->with('message', 'Validation enregistrées !!!' );
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('raf.index');
     }
 
     /**

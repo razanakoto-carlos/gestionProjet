@@ -118,8 +118,8 @@ class CaPaiementController extends Controller
         $ca->conformite_procedure = $request->input('conformite_procedure');
         $ca->observations = $request->input('observations');
         $ca->save();
-
-        return redirect()->route('caPaiement.index')->with('message', 'Validation enregistrées !!!');
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('caPaiement.index');
     }
 
     /**

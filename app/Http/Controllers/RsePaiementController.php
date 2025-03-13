@@ -120,8 +120,8 @@ class RsePaiementController extends Controller
         $rse->montant_prevu = $request->input('montant_prevu');
         $rse->observations = $request->input('observations');
         $rse->save();
-
-        return redirect()->route('rsePaiement.index')->with('message', 'Validation enregistrées !!!');
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('rsePaiement.index');
     }
 
     /**

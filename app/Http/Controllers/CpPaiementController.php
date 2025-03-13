@@ -117,8 +117,8 @@ class CpPaiementController extends Controller
         $cp->conformite_procedure = $request->input('conformite_procedure');
         $cp->observations = $request->input('observations');
         $cp->save();
-
-        return redirect()->route('cpPaiement.index')->with('message', 'Validation enregistrées !!!');
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('cpPaiement.index');
     }
 
     /**

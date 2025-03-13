@@ -99,8 +99,8 @@ class DpController extends Controller
         $dp->approbation = $request->input('approbation');
         $dp->observations = $request->input('observations');
         $dp->save();
-
-        return redirect()->route('dp.index')->with('message', 'Validation enregistrées !!!' );
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('dp.index');
     }
 
     /**

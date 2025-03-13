@@ -119,8 +119,8 @@ class RaiPaiementController extends Controller
         $rai->controle_verification = $request->input('controle_verification');
         $rai->observations = $request->input('observations');
         $rai->save();
-
-        return redirect()->route('raiPaiement.index')->with('message', 'Validation enregistrées !!!');
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('raiPaiement.index');
     }
 
     /**

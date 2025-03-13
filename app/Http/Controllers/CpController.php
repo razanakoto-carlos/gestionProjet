@@ -99,8 +99,8 @@ class CpController extends Controller
         $cp->avis_favorable = $request->input('avis_favorable');
         $cp->observations = $request->input('observations');
         $cp->save();
-
-        return redirect()->route('cp.index')->with('message', 'Validation enregistrées !!!' );
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('cp.index');
     }
 
     /**

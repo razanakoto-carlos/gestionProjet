@@ -102,7 +102,7 @@ class RpmPaiementController extends Controller
         $validator = Validator::make($request->all(), [
             'observations' => 'required'
         ]);
-        
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
@@ -134,8 +134,8 @@ class RpmPaiementController extends Controller
         $rpm->conformite_dossier_paiement = $request->input('conformite_dossier_paiement');
         $rpm->observations = $request->input('observations');
         $rpm->save();
-
-        return redirect()->route('rpmPaiement.index')->with('message', 'Validation enregistrées !!!');
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('rpmPaiement.index');
     }
 
     /**

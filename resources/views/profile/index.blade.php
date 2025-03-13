@@ -1,12 +1,12 @@
 <x-card-dashboard>
     <div>
-        <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white 
+        <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white
                 shadow-md  sm:rounded-t">
             <div class="flex justify-center text-2xl my-3 text-gray-600">
                 <h2>GESTION D'UTILISATEUR</h2>
             </div>
         </div>
-        <div class="w-full h-full overflow-y-hidden text-gray-700 bg-white 
+        <div class="w-full h-full overflow-y-hidden text-gray-700 bg-white
                 shadow-md sm:rounded-b">
             <table class="w-auto text-left table-auto min-w-max text-slate-800">
                 <thead>

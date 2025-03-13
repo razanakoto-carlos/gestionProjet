@@ -99,8 +99,8 @@ class RsenvController extends Controller
         $rsenv->validation = $request->input('validation');
         $rsenv->observations = $request->input('observations');
         $rsenv->save();
-
-        return redirect()->route('rsenv.index')->with('message', 'Validation enregistrées !!!' );
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('rsenv.index');
     }
 
     /**

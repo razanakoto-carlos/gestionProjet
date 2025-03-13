@@ -89,7 +89,7 @@ class RseController extends Controller
         }
         $rse = Rse::findorFail($id);
         $project = $rse->project;
-   
+
         if ($request->input('code_analytique') == 1 && $request->input('conformite_requete') && $request->input('conformite_tdr_ptba')) {
             $project->r_rse = 1;
             $project->save();
@@ -102,8 +102,8 @@ class RseController extends Controller
         $rse->montant_ptba = $request->input('montant_ptba');
         $rse->observations = $request->input('observations');
         $rse->save();
-
-        return redirect()->route('rse.index')->with('message', 'Validation enregistrées !!!' );
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('rse.index');
     }
 
     /**

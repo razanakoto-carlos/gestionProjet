@@ -195,8 +195,9 @@ class ProjectController extends Controller
             'date' => date('Y-m-d\TH:i'),
             'observations' => "",
         ]);
-
+        notify()->success('Le projet a été créé avec succès!');
         return redirect()->route('dashboard');
+
     }
 
     /**
@@ -244,6 +245,7 @@ class ProjectController extends Controller
             }
         }
         $project->delete();
-        return redirect()->route('dashboard')->with('status', 'project-deleted');
+        notify()->success('Le projet a été supprimer avec succès!');
+        return redirect()->route('dashboard');
     }
 }

@@ -79,7 +79,8 @@ class ProfileController extends Controller
         }
 
         $user->save();
-        return redirect()->route('profile.index')->with('status', 'profile-updated');
+        notify()->success('Votre profil a été mis à jour avec succès!');
+        return redirect()->route('profile.index');
     }
 
     /**
@@ -104,6 +105,7 @@ class ProfileController extends Controller
         }
 
         $user->delete();
-        return redirect()->route('profile.index')->with('status', 'profile-deleted');
+        notify()->success('Votre profil a été supprimé avec succès.');
+        return redirect()->route('profile.index');
     }
 }

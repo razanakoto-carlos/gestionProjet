@@ -31,7 +31,7 @@ class RafPaiementController extends Controller
             $query->where('nom_projet', 'like', "%{$request->search}%");
         })->with('project') // Charger la relation 'project' pour accéder aux données du projet si nécessaire
             ->get();
-            
+
         return view('Paiements.Raf.index', compact('paiements'));
     }
     /**
@@ -118,8 +118,8 @@ class RafPaiementController extends Controller
         $raf->montant_payer = $request->input('montant_payer');
         $raf->observations = $request->input('observations');
         $raf->save();
-
-        return redirect()->route('rafPaiement.index')->with('message', 'Validation enregistrées !!!');
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('rafPaiement.index');
     }
 
     /**

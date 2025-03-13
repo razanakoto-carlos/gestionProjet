@@ -99,8 +99,8 @@ class RaiController extends Controller
         $rai->conforme_aux_procedures = $request->input('conforme_aux_procedures');
         $rai->observations = $request->input('observations');
         $rai->save();
-
-        return redirect()->route('rai.index')->with('message', 'Validation enregistrées !!!' );
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('rai.index');
     }
 
     /**

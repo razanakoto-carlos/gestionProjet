@@ -118,8 +118,8 @@ class CptPaiementController extends Controller
         $cpt->total_global = $request->input('total_global');
         $cpt->observations = $request->input('observations');
         $cpt->save();
-
-        return redirect()->route('cptPaiement.index')->with('message', 'Validation enregistrées !!!');
+        notify()->success('Validation enregistrées !!!');
+        return redirect()->route('cptPaiement.index');
     }
 
     /**
