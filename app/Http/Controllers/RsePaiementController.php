@@ -38,7 +38,7 @@ class RsePaiementController extends Controller
                   ->where('r_dp', 1);
         })
         ->with('project')
-        ->paginate(5);
+        ->paginate(4);
 
         return view('Paiements.Rse.index', compact('paiements'));
     }
@@ -58,7 +58,7 @@ class RsePaiementController extends Controller
                 ->where('r_rai', 1)
                 ->where('r_cp', 1)
                 ->where('r_dp', 1);
-        })->with('rse')->paginate(5);
+        })->with('rse')->paginate(4);
 
         return view('Paiements.Rse.index', compact('paiements'));
     }

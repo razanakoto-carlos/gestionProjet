@@ -39,7 +39,7 @@ class RpmPaiementController extends Controller
                   ->where('r_dp', 1);
         })
         ->with('project')
-        ->paginate(5);
+        ->paginate(4);
 
         return view('Paiements.Rpm.index', compact('paiements'));
     }
@@ -60,7 +60,7 @@ class RpmPaiementController extends Controller
                 ->where('r_rai', 1)
                 ->where('r_cp', 1)
                 ->where('r_dp', 1);
-        })->with('rpm')->paginate(5);
+        })->with('rpm')->paginate(4);
 
         return view('Paiements.Rpm.index', compact('paiements'));
     }

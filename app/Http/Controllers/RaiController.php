@@ -25,7 +25,7 @@ class RaiController extends Controller
             return redirect()->route('rai.index');
         }
 
-        $projects = Project::with('rai')->where('nom_projet', 'like', "%$searchTerm%")->get();
+        $projects = Project::with('rai')->where('nom_projet', 'like', "%$searchTerm%")->paginate(4);
         return view('Requettes.Rai.index', compact('projects'));
     }
     /**
@@ -33,7 +33,7 @@ class RaiController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('rai')->paginate(5);
+        $projects = Project::with('rai')->paginate(4);
         return view('Requettes.Rai.index', compact('projects'));
     }
 

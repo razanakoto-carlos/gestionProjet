@@ -38,7 +38,7 @@ class RafPaiementController extends Controller
                   ->where('r_dp', 1);
         })
         ->with('project')
-        ->paginate(5);
+        ->paginate(4);
 
         return view('Paiements.Raf.index', compact('paiements'));
     }
@@ -58,7 +58,7 @@ class RafPaiementController extends Controller
                 ->where('r_rai', 1)
                 ->where('r_cp', 1)
                 ->where('r_dp', 1);
-        })->with('raf')->paginate(5);
+        })->with('raf')->paginate(4);
 
         return view('Paiements.Raf.index', compact('paiements'));
     }

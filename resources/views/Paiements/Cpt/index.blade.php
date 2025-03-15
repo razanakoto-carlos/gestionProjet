@@ -1,6 +1,6 @@
 <x-card-dashboard>
     <div>
-        <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white 
+        <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white
                 shadow-md  sm:rounded-t ">
             <div class="flex justify-between">
                 <form method="get" action="/search_cpt_paiement" class="mt-2 ml-4">
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div
-            class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white 
+            class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white
                 shadow-md sm:rounded-b">
             <table class="w-full text-left table-auto min-w-full text-slate-800">
                 <thead>
@@ -163,6 +163,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div  class="p-2">
+              {{ $paiements->links() }}
+            </div>
         </div>
     </div>
 </x-card-dashboard>

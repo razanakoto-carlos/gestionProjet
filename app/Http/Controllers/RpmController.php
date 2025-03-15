@@ -24,7 +24,7 @@ class RpmController extends Controller
             return redirect()->route('rpm.index');
         }
 
-        $projects = Project::with('rpm')->where('nom_projet', 'like', "%$searchTerm%")->get();
+        $projects = Project::with('rpm')->where('nom_projet', 'like', "%$searchTerm%")->paginate(4);
         return view('Requettes.Rpm.index', compact('projects'));
     }
     /**
@@ -32,7 +32,7 @@ class RpmController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('rpm')->paginate(5);
+        $projects = Project::with('rpm')->paginate(4);
         return view('Requettes.Rpm.index', compact('projects'));
     }
 

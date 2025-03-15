@@ -25,7 +25,7 @@ class RafController extends Controller
             return redirect()->route('raf.index');
         }
 
-        $projects = Project::with('raf')->where('nom_projet', 'like', "%$searchTerm%")->get();
+        $projects = Project::with('raf')->where('nom_projet', 'like', "%$searchTerm%")->paginate(4);
         return view('Requettes.Raf.index', compact('projects'));
     }
     /**
@@ -33,7 +33,7 @@ class RafController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('raf')->paginate(5);
+        $projects = Project::with('raf')->paginate(4);
         return view('Requettes.Raf.index', compact('projects'));
     }
 

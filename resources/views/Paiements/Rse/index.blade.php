@@ -1,6 +1,6 @@
 <x-card-dashboard>
     <div>
-        <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white 
+        <div class="mt-6 w-full h-full overflow-hidden text-gray-700 bg-white
                 shadow-md  sm:rounded-t ">
             <div class="flex justify-between">
                 <form method="get" action="/search_rse_paiement" class="mt-2 ml-4">
@@ -15,7 +15,7 @@
             </div>
         </div>
         <div
-            class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white 
+            class="relative flex flex-col w-full h-full overflow-scroll overflow-y-hidden text-gray-700 bg-white
                 shadow-md sm:rounded-b">
             <table class="w-full text-left table-auto min-w-full text-slate-800">
                 <thead>
@@ -75,7 +75,7 @@
                             <td class="p-4">
                                 @if (
                                     $paiement->project->r_rse == 0 ||
-                                    $paiement->project->r_rsenv == 0 ||
+                                        $paiement->project->r_rsenv == 0 ||
                                         $paiement->project->r_bm == 0 ||
                                         $paiement->project->r_raf == 0 ||
                                         $paiement->project->r_rai == 0 ||
@@ -87,7 +87,7 @@
                                     </p>
                                 @elseif (
                                     $paiement->project->r_rse == 1 &&
-                                    $paiement->project->r_rsenv == 1 &&
+                                        $paiement->project->r_rsenv == 1 &&
                                         $paiement->project->r_bm == 1 &&
                                         $paiement->project->r_raf == 1 &&
                                         $paiement->project->r_rai == 1 &&
@@ -106,8 +106,7 @@
                             </td>
                             <td class="p-4">
                                 @if ($paiement->rse()->count())
-                                    @if (
-                                        $paiement->rse->conformite_aux_activite == 0 )
+                                    @if ($paiement->rse->conformite_aux_activite == 0)
                                         <p
                                             class="text-xs  border transition ease-in-out duration-300 shadow shadow-gray-700  p-2 uppercase font-semibold text-center cursor-pointer">
                                             en cours
@@ -133,9 +132,7 @@
                             <td class="p-4">
                                 @if ($paiement->rse()->count())
                                     <p class="text-sm">
-                                        <x-rating-calculator :ratings="[
-                                            $paiement->rse->conformite_aux_activite,
-                                        ]" />
+                                        <x-rating-calculator :ratings="[$paiement->rse->conformite_aux_activite]" />
                                     </p>
                                 @else
                                     <p class="text-sm">
@@ -143,7 +140,7 @@
                                     </p>
                                 @endif
                             </td>
-                          
+
                             <td>
                                 <p href="#" class="text-sm font-normal ">
                                     @foreach (json_decode($paiement->project->fichier) as $file)
@@ -162,6 +159,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="p-2">
+                {{ $paiements->links() }}
+            </div>
         </div>
     </div>
 </x-card-dashboard>

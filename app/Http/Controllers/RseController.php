@@ -25,7 +25,7 @@ class RseController extends Controller
             return redirect()->route('rse.index');
         }
 
-        $projects = Project::with('rse')->where('nom_projet', 'like', "%$searchTerm%")->get();
+        $projects = Project::with('rse')->where('nom_projet', 'like', "%$searchTerm%")->paginate(4);
         return view('Requettes.Rse.index', compact('projects'));
     }
     /**
@@ -33,7 +33,7 @@ class RseController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('rse')->paginate(5);
+        $projects = Project::with('rse')->paginate(4);
         return view('Requettes.Rse.index', compact('projects'));
     }
 

@@ -33,7 +33,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    $projects = Project::all();
+    $projects = Project::paginate(4);
     return view('dashboard', compact('projects'));
 })->middleware(['auth'])->name('dashboard');
 

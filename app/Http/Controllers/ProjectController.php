@@ -36,7 +36,7 @@ class ProjectController extends Controller
         if (empty($searchTerm)) {
             return redirect()->route('dashboard');
         }
-        $projects = Project::where('nom_projet', 'like', "%$searchTerm%")->get();
+        $projects = Project::where('nom_projet', 'like', "%$searchTerm%")->paginate(4);
 
         return view('dashboard', compact('projects'));
     }

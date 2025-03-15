@@ -163,6 +163,9 @@
                     @endforeach
                 </tbody>
             </table>
+           <div class="p-2">
+            {{ $projects->links() }}
+           </div>
         </div>
     </div>
 </x-card-dashboard>

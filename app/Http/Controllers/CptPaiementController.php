@@ -26,7 +26,7 @@ class CptPaiementController extends Controller
         if (empty($searchTerm)) {
             return redirect()->route('cptPaiement.index');
         }
-        
+
         $paiements = Paiement::whereHas('project', function ($query) use ($searchTerm) {
             $query->where('nom_projet', 'like', "%{$searchTerm}%")
                   ->where('r_rse', 1)
@@ -38,7 +38,7 @@ class CptPaiementController extends Controller
                   ->where('r_dp', 1);
         })
         ->with('project')
-        ->paginate(5);
+        ->paginate(4);
 
         return view('Paiements.Cpt.index', compact('paiements'));
     }
@@ -58,7 +58,7 @@ class CptPaiementController extends Controller
                 ->where('r_rai', 1)
                 ->where('r_cp', 1)
                 ->where('r_dp', 1);
-        })->with('cpt')->paginate(5);
+        })->with('cpt')->paginate(4);
 
         return view('Paiements.Cpt.index', compact('paiements'));
     }

@@ -25,7 +25,7 @@ class DpController extends Controller
             return redirect()->route('dp.index');
         }
 
-        $projects = Project::with('dp')->where('nom_projet', 'like', "%$searchTerm%")->get();
+        $projects = Project::with('dp')->where('nom_projet', 'like', "%$searchTerm%")->paginate(4);
         return view('Requettes.Dp.index', compact('projects'));
     }
     /**
@@ -33,7 +33,7 @@ class DpController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('dp')->paginate(5);
+        $projects = Project::with('dp')->paginate(4);
         return view('Requettes.Dp.index', compact('projects'));
     }
 

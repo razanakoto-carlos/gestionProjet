@@ -31,7 +31,7 @@ class CaPaiementController extends Controller
         $paiements = Paiement::whereHas('project', function ($query) use ($request) {
             $query->where('nom_projet', 'like', "%{$request->search}%");
         })->with('project') // Charger la relation 'project' pour accéder aux données du projet si nécessaire
-            ->get();
+            ->paginate(4);
 
         return view('Paiements.Ca.index', compact('paiements'));
     }
@@ -51,7 +51,7 @@ class CaPaiementController extends Controller
                 ->where('r_rai', 1)
                 ->where('r_cp', 1)
                 ->where('r_dp', 1);
-        })->with('ca')->paginate(5);
+        })->with('ca')->paginate(4);
 
         return view('Paiements.Ca.index', compact('paiements'));
     }

@@ -25,7 +25,7 @@ class RsenvController extends Controller
             return redirect()->route('rsenv.index');
         }
 
-        $projects = Project::with('rsenv')->where('nom_projet', 'like', "%$searchTerm%")->get();
+        $projects = Project::with('rsenv')->where('nom_projet', 'like', "%$searchTerm%")->paginate(4);
         return view('Requettes.Rsenv.index', compact('projects'));
     }
     /**
@@ -33,7 +33,7 @@ class RsenvController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('rsenv')->paginate(5);
+        $projects = Project::with('rsenv')->paginate(4);
         return view('Requettes.Rsenv.index', compact('projects'));
     }
 

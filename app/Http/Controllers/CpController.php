@@ -25,7 +25,7 @@ class CpController extends Controller
             return redirect()->route('cp.index');
         }
 
-        $projects = Project::with('cp')->where('nom_projet', 'like', "%$searchTerm%")->get();
+        $projects = Project::with('cp')->where('nom_projet', 'like', "%$searchTerm%")->paginate(4);
         return view('Requettes.Cp.index', compact('projects'));
     }
     /**
@@ -33,7 +33,7 @@ class CpController extends Controller
      */
     public function index()
     {
-        $projects = Project::with('cp')->paginate(5);
+        $projects = Project::with('cp')->paginate(4);
         return view('Requettes.Cp.index', compact('projects'));
     }
 
