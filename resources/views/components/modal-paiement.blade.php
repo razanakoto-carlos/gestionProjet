@@ -1,9 +1,14 @@
 <div x-data="{ open: false }">
+  <style>
+    [x-cloak] {
+    display: none !important;
+}
+  </style>
     <!-- Open Modal Button -->
     <button @click="open = true"
         {{ $attributes->merge(['class' => 'w-full']) }}>{{ $buttonText ?? 'Open Modal' }}</button>
     <!-- Modal -->
-    <div x-show="open" class="fixed inset-0 flex justify-center bg-black bg-opacity-50 items-center"
+    <div x-show="open" x-cloak class="fixed inset-0 flex justify-center bg-black bg-opacity-50 items-center"
         x-transition.opacity>
         <div class="bg-white p-6 rounded-lg shadow-lg w-1/2" @click.outside="open = false" x-transition>
             <div class="flex  justify-end">

@@ -64,7 +64,8 @@ class AppServiceProvider extends ServiceProvider
             return $user->role->name != 'DP';
         });
 
-        //View in dashboard
+
+        //View in dashboard before tablee
         $requetteValide = Project::where('r_rse', 1)
             ->where('r_bm', 1)
             ->where('r_raf', 1)

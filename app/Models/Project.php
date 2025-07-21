@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Project extends Model
 {
     protected $fillable = ["nom_projet","fichier","date","r_paiement"];
+    
+    public function Paiement(){
+        return $this->hasOne(Paiement::class, 'project_id');
+    }
 
     public function Rse(){
         return $this->hasOne(Rse::class, 'project_id');
@@ -36,8 +40,5 @@ class Project extends Model
         return $this->hasOne(Rsenv::class, 'project_id');
     }
 
-    public function Paiement(){
-        return $this->hasOne(Paiement::class, 'project_id');
-    }
 
 }

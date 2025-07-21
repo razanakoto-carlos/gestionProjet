@@ -45,12 +45,14 @@ class RsePaiementController extends Controller
     /**
      * Display a listing of the resource.
      */
+    
     public function index()
     {
         if (!Gate::allows('isRse')) {
             abort(404);
         }
-        $paiements = Paiement::whereHas('project', function ($query) {
+        $paiements = Paiement::whereHas('project',
+        function ($query) {
             $query->where('r_rse', 1)
                 ->where('r_bm', 1)
                 ->where('r_rsenv', 1)

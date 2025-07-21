@@ -11,6 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
+
+        
         Schema::create('paiements', function (Blueprint $table) {
             $table->id();
             $table->integer('p_rpm')->default(0);
@@ -21,10 +23,12 @@ return new class extends Migration
             $table->integer('p_cp')->default(0);
             $table->integer('p_ca')->default(0);
             $table->unsignedBigInteger('project_id');
-            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
-            
+            $table->foreign('project_id')->references('id')
+            ->on('projects')->onDelete('cascade');
             $table->timestamps();
         });
+
+
     }
 
     /**

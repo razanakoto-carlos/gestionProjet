@@ -11,7 +11,7 @@
                 </form>
             </div>
             <div class="flex justify-center text-2xl my-3 text-gray-600">
-                <h2>APPROBATION DE REQUETES</h2>
+                <h2>APPROBATION DE PAIEMENTS</h2>
             </div>
         </div>
         <div

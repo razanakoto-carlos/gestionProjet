@@ -1,5 +1,5 @@
 <x-card-dashboard>
-    <div class="mt-5 w-full h-full overflow-hidden text-gray-700 bg-white 
+    <div class="mt-5 w-full h-full overflow-hidden text-gray-700 bg-white
                 shadow-md  sm:rounded-t">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-4 space-y-6">
             <div class="py-4 sm:p-8">
@@ -34,6 +34,7 @@
                                 </div>
                                 <x-input-error class="mt-2" :messages="$errors->get('email')" />
                             </div>
+
                             {{-- Role d'utilisateur --}}
                             @can('isDP')
                                 <div>
@@ -41,11 +42,13 @@
                                         <x-input-label class="mr-14 text-lg text-gray-500 font-semibold" for="role_id"
                                             :value="__('Role')" />
                                         <select name="role_id" id="role_id"
-                                            class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
+                                            class="block w-full h-8 px-3 py-2 border border-gray-300 rounded-sm shadow-sm
+                                            focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">>
                                             <option value="">Selectionner un role</option>
                                             @foreach ($roles as $role)
                                                 <option value="{{ $role->id }}"
-                                                    {{ old('role_id', $user->role_id) == $role->id ? 'selected' : '' }}>
+                                                    {{ old('role_id', $user->role_id)
+                                                     == $role->id ? 'selected' : '' }}>
                                                     {{ $role->name }}</option>
                                             @endforeach
                                         </select>
@@ -53,6 +56,7 @@
                                     <x-input-error class="mt-2" :messages="$errors->get('role_id')" />
                                 </div>
                             @endcan
+
                             {{-- Mot de passe --}}
                             <div>
                                 <div class="flex flex-row text-center items-center">
@@ -82,7 +86,7 @@
                             </div>
                             <div class="flex items-center gap-4">
                                 <button type="submit"
-                                    class="mt-2 inline-flex items-center px-4 py-1 bg-blue-600 border font-semibold text-white uppercase 
+                                    class="mt-2 inline-flex items-center px-4 py-1 bg-blue-600 border font-semibold text-white uppercase
                                 hover:bg-blue-700 focus:bg-blue-700transition ease-in-out duration-150">Modifier</button>
                                 @if (session('status') === 'profile-updated')
                                     <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
